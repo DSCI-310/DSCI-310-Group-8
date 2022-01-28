@@ -1,3 +1,3 @@
 # dsci310-project-group-8
 
-# Add a readme
+# This is group 8
