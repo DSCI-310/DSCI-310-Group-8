@@ -1,3 +1,3 @@
-# dsci310-project-group-8
+# DSCI-310-Group-8
 
-# This is group 8
+
