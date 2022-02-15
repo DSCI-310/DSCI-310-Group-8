@@ -7,7 +7,6 @@ the need for respect and tolerance among collaborators, recognizing each person'
 and showing empathy towards others.
 
 
-<br/>
 ## Statement on Equity, Diversity and Inclusivity 
 Diverse backgrounds, perspectives, and experiences create a more welcoming and productive environment.
 Consequently, equity, diversity, and inclusion are core to the successful completion of the project and to a happier team. 
@@ -20,7 +19,6 @@ Inclusion is the cultivation of an environment in which all people are respected
 their differences are embraced, and where they all have access to the same opportunities.
 
 
-<br/>
 ## Expected Behaviour 
 - Use welcoming, inclusive, and language.
 - Speak in a professional and non-aggressive tone. 
@@ -33,7 +31,6 @@ their differences are embraced, and where they all have access to the same oppor
 - Be supportive of collaborators.
 
 
-<br/>
 ## Unacceptable Behaviour
 - Sexual advances and behaviour of any kind, including sexualized language, imagery, and comments.
 - Harassment of any kind, including trolling, insulting or derogatory comments and attacks on others
@@ -44,13 +41,12 @@ their differences are embraced, and where they all have access to the same oppor
 - Any other activity which no reasonable person would consider ethical or appropriate for a professional setting. 
 
 
-<br/>
 ## Consequences for Unacceptable Behaviour 
 - Instances of unacceptable behaviour of any kind should be reported to one of the other collaborators.
 - Any unacceptable behaviour will be considered a breach of the team contract and will follow the procedure outlined in the section Breach of Contract. <br/>
 - All collaborators are required to act and follow the outlined procedures if any unacceptable behaviour is witnessed or reported.
 
-## Breach of Contract: <br/>
+## Breach of Contract: 
 Failure to follow the team contract will result in a three-step warning system:<br/>			 
 1. The first step is a written WhatsApp notice that outlines the violation of the team contract and a reminder of the team contract conditions. <br/>	
 2. The second step is a meeting to discuss the behaviour and the violating member will be required to write an agreement to follow the team contract.<br/>
