@@ -22,7 +22,7 @@ their differences are embraced, and where they all have access to the same oppor
 ## Expected Behaviour 
 - Use welcoming, inclusive, and language.
 - Speak in a professional and non-aggressive tone. 
-- Recognize and respect cultural and linguistic differences in writing.
+- Recognize and respect cultural and linguistic differences in writing and speaking.
 - Perform work to the best of your abilities.
 - Recognize the effort of others. 
 - Provide criticism in the form of constructive feedback.
@@ -48,8 +48,8 @@ their differences are embraced, and where they all have access to the same oppor
 
 ## Breach of Contract: 
 Failure to follow the team contract will result in a three-step warning system:<br/>			 
-1. The first step is a written WhatsApp notice that outlines the violation of the team contract and a reminder of the team contract conditions. <br/>	
-2. The second step is a meeting to discuss the behaviour and the violating member will be required to write an agreement to follow the team contract.<br/>
+1. The first step is a written WhatsApp notice that outlines the violation of the team contract and a reminder of the team contract and code of conduct conditions. <br/>	
+2. The second step is a meeting to discuss the behaviour and the violating member will be required to write an agreement to follow the team contract and code of conduct.<br/>
 3. The third step is to reach out to the lab instructor or TAs about the issues with the teammate. 	 <br/>
 4. With very serious or continuous breaches the team will reach out to the professor. <br/>
 Note: This three-step warning system is a guideline and not a fixed rule. If the other team members agree that the breach was serious enough to warrant the 
