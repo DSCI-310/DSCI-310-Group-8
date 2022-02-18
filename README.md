@@ -42,13 +42,13 @@ As mentioned in the Introduction, we had initially believed the accuracy of our 
 In conclusion, our findings will somewhat help students assess how well they are performing in comparison to the time they are spending studying. As you spend more time studying, you may perform better, but other external factors can also come into play and affect your final results. Since it is final season, it is important to remember that although studying is extremely important, it is also crucial to take care of other things such as your physical and mental health.
 
 
-
-<br/>
-## Dependencies
-
-<br/>
-## Licenses
-
-<br/>
 ## How to run this project
+Clone this repository and run following code on command line to install required dependencies for this project:
+
+#### fill in docker run --rm -it -p 8888:8888 <workflow_insert_here>
+
+
+## Licence
+This project is licensed under the MIT License and [Creative Commons Attribution-NonCommerical-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:1" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />
 
