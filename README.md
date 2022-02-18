@@ -45,8 +45,9 @@ In conclusion, our findings will somewhat help students assess how well they are
 ## How to run this project
 Clone this repository and run following code on command line to install required dependencies for this project:
 
-#### fill in docker run --rm -it -p 8888:8888 <workflow_insert_here>
-
+```
+### fill in docker run --rm -it -p 8888:8888 <workflow_insert_here>
+```
 
 ## Licence
 This project is licensed under the MIT License and [Creative Commons Attribution-NonCommerical-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/)
