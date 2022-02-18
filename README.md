@@ -7,6 +7,9 @@ Tony Liang (39356993),
 Xue Wang (50938547),
 Anam Hira (67844266)<br/>
 
+## Project Title
+Using the Regression to Predict the Student Exam Performance by Study Time
+
 <br/>
 ## Project Summary <br/>
 
