@@ -29,7 +29,7 @@ R version 4.1.1, Jupyter and R packages listed in <code>environment.yml
 Clone this repository and run following code on command line to install required dependencies for this project:
 
 ```
-### fill in docker run --rm -it -p 8888:8888 <workflow_insert_here>
+docker run --rm -it -p 8888:8888 group8Project
 ```
 
 ## License
