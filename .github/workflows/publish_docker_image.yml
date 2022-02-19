@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths: 
-      - 'Dockerfile'
+      - 'DockerFile'
 jobs:
   build:
     runs-on: ubuntu-latest
