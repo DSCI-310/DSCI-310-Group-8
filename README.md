@@ -23,7 +23,7 @@ The dataset we used was the User Knowledge Modeling Dataset provided by [UCL Mac
 
 
 ## Dependencies
-<code> R version 4.1.1, Jupyter and R packages listed in environment.yml
+R version 4.1.1, Jupyter and R packages listed in <code>environment.yml
 </code>
 ## How to run this project
 Clone this repository and run following code on command line to install required dependencies for this project:
