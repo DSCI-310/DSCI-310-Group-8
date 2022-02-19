@@ -7,7 +7,15 @@ RUN conda install -c conda-forge -y --quiet \
     r-base=4.1.* \
     r-irkernel \
     jedi \
-    nbconvert=6.*
+    nbconvert=6.* \
+    r-tidyverse \
+    r-digest \ 
+    r-repr \ 
+    r-tidymodels \ 
+    r-readxl \ 
+    r-cowplot \ 
+    r-GGally \
+    r-broom 
 
 
 
