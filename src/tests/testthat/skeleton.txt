@@ -1,0 +1,21 @@
+## Skeleton for making tests
+library(testthat)
+source("../tests/testthat/...")
+
+test_that("", {
+    expect_error(...(..., ..., ...))
+    expect_error(...(..., ..., ...))
+    expect_error(...(..., ..., ...))
+})
+
+test_that("", {
+    expect_error(...(..., ..., ...))
+    expect_error(...(..., ..., ...))
+    expect_error(...(..., ..., ...))
+})
+
+test_that("", {
+   expect_error(...(..., ..., ...))
+   expect_error(...(..., ..., ...))
+   expect_error(...(..., ..., ...))
+})
