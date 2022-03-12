@@ -20,7 +20,13 @@ This can be attributed to the fact that exam performance could be affected by ot
 
 The dataset we used was the User Knowledge Modeling Dataset provided by [UCL Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/User+Knowledge+Modeling#). 
 
+## Report
+The analysis report can be found [here](https://github.com/DSCI-310/DSCI-310-Group-8/blob/main/analysis/student_performance_analysis.ipynb).
+## Usage
+We use a Docker container image to make the project to be reproducible by creating a computational environment.
 
+Here,we have two ways to run this.The first one is for reproducing the results by executing the project non-interactively.
+The second one is for collaborators and project producers by interactively running, edit and explore the project in the Jupyter Lab.
 
 ## Dependencies
 R version 4.1.1, Jupyter and R packages listed in <code>environment.yml
