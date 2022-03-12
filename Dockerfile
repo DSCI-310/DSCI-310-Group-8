@@ -1,21 +1,9 @@
-FROM continuumio/miniconda3
+FROM ubcdsci/jupyterlab:v0.9.0
 
 # Install Jupyter, JupterLab, R & the IRkernel
-RUN conda install -c conda-forge -y --quiet \
-    jupyter \
-    jupyterlab=3.* \
-    r-base=4.1.* \
-    r-irkernel \
-    jedi \
-    nbconvert=6.* \
-    r-tidyverse \
-    r-digest \ 
-    r-repr \ 
-    r-tidymodels \ 
-    r-readxl \ 
-    r-cowplot \ 
-    r-GGally \
-    r-broom 
+# Packages and versions specificed in environment.yml
+COPY environment.yml .
+RUN conda env update --file environment.yml
 
 
 
@@ -37,6 +25,7 @@ RUN apt-get update --yes && \
 
 # Copy JupyterLab start-up script into container
 COPY start-notebook.sh /usr/local/bin/
+
 
 # Change permission of startup script and execute it
 RUN chmod +x /usr/local/bin/start-notebook.sh
