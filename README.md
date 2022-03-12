@@ -2,10 +2,10 @@
 ## Group members
 
 Authors: 
-Isabela Lucas Bruxellas (33569286),
-Tony Liang (39356993),
-Xue Wang (50938547),
-Anam Hira (67844266)<br/>
+- Isabela Lucas Bruxellas (33569286),
+- Tony Liang (39356993),
+- Xue Wang (50938547),
+- Anam Hira (67844266)
 
 ## Project Title
 Using the Regression to Predict the Student Exam Performance by Study Time
@@ -25,8 +25,12 @@ The analysis report can be found [here](https://github.com/DSCI-310/DSCI-310-Gro
 ## Usage
 We use a Docker container image to make the project to be reproducible by creating a computational environment.
 
-Here,we have two ways to run this.The first one is for reproducing the results by executing the project non-interactively.
+Here,we have two ways to run this.
+The first one is for reproducing the results by executing the project non-interactively.
 The second one is for collaborators and project producers by interactively running, edit and explore the project in the Jupyter Lab.
+
+1. Reproducibly execute the project in a non-interactive way
+
 
 ## Dependencies
 R version 4.1.1, Jupyter and R packages listed in <code>environment.yml
