@@ -18,12 +18,7 @@ load_data <- function(path, sheet, ...) {
   
    if (!is.numeric(sheet)) {
      stop("Sheet must be a number! Please try again.")
-   }
-
-    # if(is.character(...)) {
-    #   stop("Column names dont need to be quoted and you can enter
-    #        their relative positions as well")
-    # }
+    }
     
     cols <- enquos(...)
     read_excel(path, sheet) |>

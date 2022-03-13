@@ -19,6 +19,8 @@ summary_fun <- function(df, fun) {
   
   if(!is.function(fun)){
     stop("fun must be a function only")
+  } else if (nrow(df) < 1) {
+    return(data.frame(mean = numeric(0)))
   }
     purrr::map_df(df, fun, na.rm = TRUE)
 }

@@ -17,6 +17,3 @@ test_that("`visualize_vars` returns a ggplot object", {
     expect_s3_class(visualize_vars(test_df,test_x,test_y), class = "ggplot")
 })
 
-#test_that("`visualize_vars` is returning correct output", {
-#    expect_equivalent(visualize_vars(test_df, "len", "wid"), test_output)
-#})

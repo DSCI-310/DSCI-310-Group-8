@@ -15,6 +15,11 @@ test_that("fun should be a function only", {
 
 test_that("`summary_fun` returns a data frame", {
     expect_s3_class(summary_fun(df,test_fun), "data.frame")
+    expect_s3_class(summary_fun(df, sd), "data.frame")
+    expect_s3_class(summary_fun(df, var), "data.frame")
+    expect_s3_class(summary_fun(df2,test_fun), "data.frame")
+    expect_s3_class(summary_fun(df2, sd), "data.frame")
+    expect_s3_class(summary_fun(df2, var), "data.frame")
 })
 
 test_that("`summary_fun` should be a single statistic of the variable", {
