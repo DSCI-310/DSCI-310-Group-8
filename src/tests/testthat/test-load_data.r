@@ -13,5 +13,16 @@ test_that("Sheet should be numeric", {
 })
 
 test_that("`load_data` should return a data frame", {
-  expect_s3_class(load_data(test_dest, 2, 2), "data.frame")
+    expect_s3_class(load_data(test_dest, 2, 2), "data.frame")
+    expect_s3_class(load_data(test_dest,2, cols[1]), "data.frame")
+    expect_s3_class(load_data(test_dest,2, cols[2]), "data.frame")
+    expect_s3_class(load_data(test_dest,2, cols[3]), "data.frame")
+    expect_s3_class(load_data(test_dest,2, cols[4]), "data.frame")
+    expect_s3_class(load_data(test_dest,2, cols[5]), "data.frame")
+    expect_s3_class(load_data(test_dest,3, cols[1]), "data.frame")
+    expect_s3_class(load_data(test_dest,3, cols[2]), "data.frame")
+    expect_s3_class(load_data(test_dest,3, cols[3]), "data.frame")
+    expect_s3_class(load_data(test_dest,3, cols[4]), "data.frame")
+    expect_s3_class(load_data(test_dest,3, cols[5]), "data.frame")
 })
+
