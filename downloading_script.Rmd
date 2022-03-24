@@ -1,0 +1,9 @@
+---
+title: "Downloading_script"
+output: html_notebook
+---
+
+```{r}
+download.file("https://archive.ics.uci.edu/ml/machine-learning-databases/00257/Data_User_Modeling_Dataset_Hamdi%20Tolga%20KAHRAMAN.xls", '../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls')
+```
+
