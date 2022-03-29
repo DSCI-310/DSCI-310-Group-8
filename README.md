@@ -33,11 +33,10 @@ In this project, we use a Docker container image to make the project reproducibl
 3- Run the following in the terminal
 
 ```
-docker run --rm \
-  -p 8888:8888 \
-  -v /$(pwd)::/opt/analysis/student_performance_analysis.ipynb
-  anamhira47/group8project \
+docker run -p 8888:8888 -v /$(pwd):/opt/notebooks anamhira47/group8project
   jupyter nbconvert --to notebook --execute DSCI-310-Group-8/analysis/student_performance_analysis.ipynb
+  
+  
 ```
 
 ### How to run this project interactively 
