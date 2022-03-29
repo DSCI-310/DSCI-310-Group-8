@@ -11,9 +11,7 @@ Options:
     " -> doc
 
 library(tidyverse)
-library(docopt)
+
+data <- download.file(opt$url,opt$file_path)
 
 data <- download.file("https://archive.ics.uci.edu/ml/machine-learning-databases/00257/Data_User_Modeling_Dataset_Hamdi%20Tolga%20KAHRAMAN.xls","../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xl" )
-
-print (data)
-
