@@ -43,6 +43,9 @@ source("../src/tests/testthat/test-visualize_vars.R")
 opt <- docopt(doc)
 main <- function(df,results) {
     
+    if (!dir.exists(results)) {
+    dir.create(results)
+  }
     train_data <- read_feather(train) %>% 
     user_means <- summary_fun(user_training,mean)
     
@@ -68,7 +71,7 @@ main <- function(df,results) {
     #     peg_stg,
      #    width = 8, 
       #   height = 10)
-    ggsave("peg_stg.png", device = "png", path = out_dir, width = 5, height = 4)
+    ggsave("peg_stg.png", device = "png", path = results, width = 5, height = 4)
 }
 
 main(opt[["--df"]], opt[["--results"]])
