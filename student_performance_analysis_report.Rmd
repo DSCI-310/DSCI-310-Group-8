@@ -166,6 +166,26 @@ To visualize our final results, we plotted our predictions as a line using geom_
 
 ---
 # Insert linear regression script with interpretations as comments
+```{r linear_regression, include=FALSE, echo=FALSE}
+lm_spec <- linear_reg() %>%
+        set_engine("lm") %>%
+        set_mode("regression")
+#Creating and assigning our linear regression model specification to an object called lm_spec.
+
+performance_recipe <- recipe(PEG~.,data = user_training)
+
+#Creating a recipe for the model and assigning it to credit_recipe.
+
+performance_fit <- workflow() %>%
+add_recipe(performance_recipe) %>%
+add_model(lm_spec) %>%
+fit(data = user_training)
+
+
+
+#Fitting our simple linear regression model by using the model specification and recipe.
+
+```
 ---
 
 Table 4 shows the model of linear regression between the STG and PEG
