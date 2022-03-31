@@ -5,16 +5,6 @@
 to help the consumer understand the dataset"
 
 "Usage src/data_visualisation.r --train=<train> --out_dir=<out_dir>"
-#' 
-#' @param data frame or extension of data
-#' @param theme that you want to specify
-#'
-#' @return The correlation table for the variables within the data
-#' @export
-#'
-
-#' 
-#' 
 
 "Options:
 --df=<df>     Path (including filename) to training data
