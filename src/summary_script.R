@@ -1,13 +1,13 @@
 # author Anam HIra
 # date: 2022-03-28
 
-"Scriptt to create exploratory data visualisations and tables that are useful
-to help the consumer understand the dataset"
+"Script that reads data from the second script and performs the modelling and saves teh figures "
 
-"Usage src/data_visualisation.r --train=<train> --out_dir=<out_dir>"
+"Usage src/summary_script.r --user_testing<testing> --user_training=<train> --results=<out_dir>"
 
 "Options:
---df=<df>     Path (including filename) to training data
+-user_training=<training>     Path (including filename) to training data
+-user_testing=<testing>     Path (including filename) to testing data
 --results=<results> Path to directory where the plots should be saved"
 library(tidyverse)
 library(digest)
