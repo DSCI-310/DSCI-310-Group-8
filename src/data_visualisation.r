@@ -20,22 +20,50 @@ to help the consumer understand the dataset"
 --df=<df>     Path (including filename) to training data
 --results=<results> Path to directory where the plots should be saved"
 library(tidyverse)
-library(docopt)
-library(ggthemes)
-library(ggplot2)
-
+library(digest)
+library(repr)
+library(tidymodels)
+library(readxl)
+library(cowplot)
+library(GGally)
+library(broom)
+library(rlang)
+library(testthat)
+options(repr.matrix.max.rows = 6)
+source("../src/R/load_data.R")
+source("../src/R/wrangle_data.R")
+source("../src/R/summary_fun.R")
+source("../src/R/num_na.R")
+source("../src/R/visualize_vars.R")
+source("../src/tests/testthat/test-load_data.R")
+source("../src/tests/testthat/test-num_na.R")
+source("../src/tests/testthat/test-summary_fun.R")
+source("../src/tests/testthat/test-wrangle_data.R")
+source("../src/tests/testthat/test-visualize_vars.R")
 opt <- docopt(doc)
 main <- function(df,results) {
     
     train_data <- read_feather(train) %>% 
-    ggpairs() +
-    theme_bw
-    ggsave(paste0(results, "/pair_comparison.png"), 
-         df,
+    user_means <- summary_fun(user_training,mean)
+    
+
+    maximum <- summary_fun(user_training, max)
+    maximum
+    minimum <- summary_fun(user_training, min)
+    minimum
+
+    observations <- user_training %>%
+    summarize(n = n())
+    observations
+
+    
+    peg_stg <- visualize_vars(user_training, STG, PEG)
+    peg_stg
+    
+    ggsave(paste0(out_dir, "/visualise_data.png"), 
+         peg_stg,
          width = 8, 
          height = 10)
 }
-
-
 
 main(opt[["--df"]], opt[["--results"]])
