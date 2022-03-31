@@ -49,21 +49,26 @@ main <- function(df,results) {
 
     maximum <- summary_fun(user_training, max)
     maximum
+    write_csv(maximum,
+            file.path(out_dir, "maximum.csv"))
     minimum <- summary_fun(user_training, min)
-    minimum
+    write_csv(minimum,
+            file.path(out_dir, "minimum.csv"))
 
     observations <- user_training %>%
     summarize(n = n())
-    observations
+    write_csv(observations,
+            file.path(out_dir, "observations.csv"))
 
     
     peg_stg <- visualize_vars(user_training, STG, PEG)
     peg_stg
     
-    ggsave(paste0(out_dir, "/visualise_data.png"), 
-         peg_stg,
-         width = 8, 
-         height = 10)
+   # ggsave(paste0(out_dir, "/visualise_data.png"), 
+    #     peg_stg,
+     #    width = 8, 
+      #   height = 10)
+    ggsave("peg_stg.png", device = "png", path = out_dir, width = 5, height = 4)
 }
 
 main(opt[["--df"]], opt[["--results"]])
