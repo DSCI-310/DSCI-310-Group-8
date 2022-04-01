@@ -36,25 +36,25 @@ main <- function(df,results) {
     if (!dir.exists(results)) {
     dir.create(results)
   }
-    train_data <- read_feather(train) %>% 
-    user_means <- summary_fun(user_training,mean)
+    data_training <- read_feather(df) %>% 
+    user_means <- summary_fun(data_training,mean)
     
 
-    maximum <- summary_fun(user_training, max)
+    maximum <- summary_fun(data_training, max)
     maximum
     write_csv(maximum,
             file.path(out_dir, "maximum.csv"))
-    minimum <- summary_fun(user_training, min)
+    minimum <- summary_fun(data_training, min)
     write_csv(minimum,
             file.path(out_dir, "minimum.csv"))
 
-    observations <- user_training %>%
+    observations <- data_training %>%
     summarize(n = n())
     write_csv(observations,
             file.path(out_dir, "observations.csv"))
 
     
-    peg_stg <- visualize_vars(user_training, STG, PEG)
+    peg_stg <- visualize_vars(data_training, STG, PEG)
     peg_stg
     
    # ggsave(paste0(out_dir, "/visualise_data.png"), 
