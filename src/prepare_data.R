@@ -7,7 +7,7 @@ identifieds the variable with the highest correlation to the target variable. Tr
 variable and of the variable with the highest correlation to it. Creates testing data selecting only numeric columns from the third 
 sheet and selecting only the relevant columns determined for training data.
 
-Usage: Rscript download_data.R --url=<url> --file_path=<file_path> 
+Usage: download_data.R --url=<url> --file_path=<file_path> 
 
 Options:
     --file_path=<file_path>   Path to the data file
@@ -68,6 +68,7 @@ main_training <- function(file_path, target_value){
     result <- highest_cor(data_training_raw, target_value)
     data_training <- assert_data(data_training_raw, result, target_value)
     return(data_training)
+    write.csv(data_training, data/data_training)
 }
 
 main_testing <- function(file_path, target_value){
@@ -76,6 +77,7 @@ main_testing <- function(file_path, target_value){
     result <- highest_cor(data_training_raw, target_value)
     data_testing <- assert_data(data_testing_raw, result, target_value)
     return(data_testing)
+    write.csv(data_testing, data/data_testing)
 }
 
 main_training(opt$file_path, !!opt$target_variable)
