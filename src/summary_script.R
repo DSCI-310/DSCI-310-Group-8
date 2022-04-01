@@ -1,7 +1,7 @@
 # author Anam HIra
 # date: 2022-03-28
 
-"Script that reads data from the second script and performs the modelling and saves teh figures "
+"Script tfhat reads data from the second script and performs the modelling and saves teh figures "
 
 "Usage src/summary_script.r --user_testing<testing> --user_training=<train> --results=<out_dir>"
 
