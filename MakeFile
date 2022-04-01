@@ -8,7 +8,11 @@ rmd: results/peg_stg.png results/maximum.csv results/minumum.csv results/observa
 
 # generate figures and objects for report
 results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv: source/generate_figures.R
-	Rscript source/data_visualisation.R --input_dir="data/00030067-eng.csv" --out_dir="results"
+	Rscript source/data_visualisation.R --df="../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls" --results="results"
+
+results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv: source/generate_figures.R
+	Rscript source/summary_script.R --user_training="../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls" --user_testing="../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls" --results="/results"
+
 
 # render R Markdown report in HTML and PDF
 doc/rmd_example/rmd_example.html doc/rmd_example/rmd_example.pdf: doc/rmd_example/rmd_example.Rmd doc/rmd_example/references.bib
