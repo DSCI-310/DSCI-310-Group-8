@@ -3,7 +3,7 @@
 
 "This script downloads the data from the internet and saves it locally.
 
-Usage: Rscript download_data.R --url=<url> --file_path=<file_path> 
+Usage: download_data.R --url=<url> --file_path=<file_path> 
 
 Options:
     --url=<url>               Url to download data
@@ -15,7 +15,8 @@ library(docopt)
 
 opt <- docopt(doc)
 
-data <- download.file(opt$url, opt$file_path)
+data <- download.file(opt$url,opt$file_path)
 
-print (data)
+print(data)
+print(opt)
 
