@@ -1,7 +1,7 @@
 
    
 # author: Anam Hira
-# date: 2022-03-31
+# date: 2022-04-01
 
 rmd: results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv  doc/rmd_example/rmd_example.html doc/rmd_example/rmd_example.pdf
 
