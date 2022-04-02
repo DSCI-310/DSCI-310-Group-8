@@ -3,7 +3,7 @@
 # author: Anam Hira
 # date: 2022-04-01
 
-rmd: results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv results/lm_predictions.png results/lm_rmse.csv results/ analysis/report.pdf
+rmd: results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv results/lm_rmse.csv results/lm_rmspe.csv results/kmin.csv results/knn_rmspe.csv results/lm_predictions.png results/knn_regressions_plot.png results/analysis/report.pdf
 
 
 # generate figures and objects for report
@@ -12,10 +12,10 @@ workflow: Rscript src/download_data.R
 
 prepare: Rscript src/prepare_data.R
 
-results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv: src/data_visualisation.R
+results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv  : src/data_visualisation.R
 	Rscript src/data_visualisation.R --df="../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls" --results="results"
 
-results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv: source/summary_script.R
+results/lm_rmse.csv results/lm_rmspe.csv results/kmin.csv results/knn_rmspe.csv results/lm_predictions.png results/knn_regressions_plot.png: source/summary_script.R
 	Rscript src/summary_script.R --user_training="../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls" --user_testing="../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls" --results="/results"
 
 
