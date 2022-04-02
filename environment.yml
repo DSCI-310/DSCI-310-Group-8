@@ -33,7 +33,13 @@ dependencies:
   - r-usethis=2.1.5
   - r-vdiffr=1.0.2
   - r-vroom=1.5.7
-
+  - r-bookdown=0.25
+  - r-knitr=1.26
+  - r-feather=0.3.5
+  - r-caret=6.0-85
+  - r-ggridges=0.5.2
+  - Jupyter Notebook version=6.4.8
+  - GNU version=4.2.1
   
 
     
