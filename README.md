@@ -28,16 +28,25 @@ In this project, we use a Docker container image to make the project reproducibl
 
 ### How to run this project non-interactively 
 
-1- Clone this GitHub repository 
-2- Open the terminal and navigate to the root of this project
-3- Run the following in the terminal
+1- Clone this GitHub repository and run the following code in the terminal
+
+```
+git clone https://github.com/DSCI-310/DSCI-310-Group-8
+```
+2- Open the terminal and run the following in the terminal
 
 ```
 docker run -p 8888:8888 -v /$(pwd):/opt/notebooks anamhira47/group8project
-  jupyter nbconvert --to notebook --execute DSCI-310-Group-8/analysis/student_performance_analysis.ipynb
-  
-  
 ```
+3- click the last link such as
+
+```
+ http://127.0.0.1:8888/lab?token=22205c1b665b8e6ba27542800fff06e73820a5904597d336
+ 
+```
+in the terminal and open the link in the Google Chrome
+
+4- open the any documents in the Jupyter Notebook through the link
 
 ### How to run this project interactively 
 
