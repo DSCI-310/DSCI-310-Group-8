@@ -24,22 +24,42 @@ The dataset we used was the User Knowledge Modeling Dataset provided by [UCL Mac
 The analysis report can be found [here](https://github.com/DSCI-310/DSCI-310-Group-8/blob/main/analysis/student_performance_analysis.ipynb).
 
 ## Usage(How to Run the Project)
-We use a Docker container image to make the project to be reproducible by creating a computational environment.
-In order to use build the same environment for running this project, we would recommend to use the DockerFile and run the jupyter notebook inside this container.
-Firstly, 
-Build the image in the directory of the dockerfile:
+In this project, we use a Docker container image to make the project reproducible by creating a computational environment. If you would like to run this project to reproduce our results you can reproducibly execute the project non-interactively. If you would like to collaborate on this project, you can interactively run, edit and explore the project in Jupyter Lab.
+
+### How to run this project non-interactively 
+
+1- Clone this GitHub repository 
+2- Open the terminal and navigate to the root of this project
+3- Run the following in the terminal
+
+```
+docker run -p 8888:8888 -v /$(pwd):/opt/notebooks anamhira47/group8project
+  jupyter nbconvert --to notebook --execute DSCI-310-Group-8/analysis/student_performance_analysis.ipynb
+  
+  
+```
+
+### How to run this project interactively 
+
+This is used to interactively run Jupyter lab inside the DSCI-310/DSCI-310-Group-8 Docker container 
+
+1- Clone this GitHub repository 
+2- Open the terminal and navigate to the root of this project
+3- Build the image in the directory of the dockerfile by typing: 
 
 ```
 docker build -t group8Project
 ```
-Then
-Clone this repository and run following code on command line to start running the project in Jupyter Notebook:
+4- Run the following code on the command line to start running the project in Jupyter Notebook:
 
 ```
 docker run --rm -it -p 8888:8888 group8Project
 ```
+5- In Jupyter lab, open analysis/student_performance_analysis.ipynb and click Kernel > Restart and runall to run the entire analysis
+6- Collaborate on the analysis while making sure to follow the all documentation, including but not limited to the Code of Conduct and Contributing
+7- After the work session, type docker-compose down to remove the dangling container.
 
-Attention: The dependencies version has been list below and make sure to use the same version when running the project in the Dockerfile.
+Attention: The dependencies version has been listed below. In order to properly run this project, ensure that you are using the same versions when running the project in the Dockerfile.
 
 ## Dependencies
 R version 4.1.1, Jupyter and R packages listed in <code>environment.yml

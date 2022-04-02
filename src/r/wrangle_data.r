@@ -12,16 +12,11 @@
 #' wrangle_data(data_1)
 #' wrangle_data(data_2)
 #' wrangle_data(data_1, vars = c("SCG", "STR"))
-wrangle_data <- function(df, vars = interest_variables) {
-    if(!is.data.frame(df)) {
+wrangle_data <- function(df, vars = col) {
+    if (!is.data.frame(df)) {
       stop("df must be a dataframe, please try again!")
-    }
-  
-    if(!is.character(vars)) {
-      stop("vars must be characters only, please try again!")
-    }
-    
-    interest_variables <- c("STG", "PEG")
+    } else
+    col <- c("STG", "PEG")
     df |>
-    dplyr::select(all_of(interest_variables))
+    dplyr::select(all_of(col))
 }
