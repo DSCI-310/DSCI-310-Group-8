@@ -7,7 +7,7 @@ identifieds the variable with the highest correlation to the target variable. Tr
 variable and of the variable with the highest correlation to it. Creates testing data selecting only numeric columns from the third 
 sheet and selecting only the relevant columns determined for training data.
 
-Usage: download_data.R --url=<url> --file_path=<file_path> 
+Usage: prepare_data.R --file_path=<file_path> --target_value=5 
 
 Options:
     --file_path=<file_path>   Path to the data file
