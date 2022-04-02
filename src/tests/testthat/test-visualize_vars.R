@@ -1,5 +1,4 @@
 library(testthat)
-source("../src/tests/testthat/helper-visualize_vars.r")
 
 test_that("df should be a dataframe", {
     expect_error(visualize_vars(df_wr1, test_x, test_x))

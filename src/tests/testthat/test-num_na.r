@@ -1,30 +1,28 @@
 library(testthat)
-source("../src/tests/testthat/helper-num_na.r")
 
-test_that("df should be a dataframe", {
-    expect_error(num_na(df_wr1, stg))
-    expect_error(num_na(df_wr2, stg))
+
+test_that("Df should be a data frame", {
+    expect_s3_class(mtcars, "data.frame")
+    expect_error(num_na(0, mpg))
+    expect_error(num_na("empty", mpg))
+    expect_error(num_na(TRUE, mpg))
 })
 
-test_that("`num_na` should produce numeric answer", {
-     expect_type(num_na(df,cols[1]), "integer")
-     expect_type(num_na(df,cols[2]), "integer")
-     expect_type(num_na(df,cols[3]), "integer")
-     expect_type(num_na(df,cols[4]), "integer")
-     expect_type(num_na(df,cols[5]), "integer")
-     expect_type(num_na(df,cols[6]), "integer")
-     expect_type(num_na(df,cols[7]), "integer")
+test_that("Output is an integer", {
+    expect_type(num_na(mtcars, mpg), "integer")
+    expect_type(num_na(mtcars, cyl), "integer")
+    expect_type(num_na(mtcars, disp), "integer")
 })
 
-test_that("`num_na should produce 0 in our project as it was complete", {
-    expect_equal(num_na(df, cols[1]), 0)
-    expect_equal(num_na(df, cols[2]), 0)
-    expect_equal(num_na(df, cols[3]), 0)
-    expect_equal(num_na(df, cols[4]), 0)
-    expect_equal(num_na(df, cols[5]), 0)
-    expect_equal(num_na(df, cols[6]), 0)
-    expect_equal(num_na(df, cols[7]), 0)
+test_that("Ouput should be correct", {
+    expect_equal(num_na(mtcars, mpg),0)
 })
 
+test_that("Var does not exist", {
+    expect_error(num_na(mtcars, dne))
+})
 
-
+test_that("Var should be one variable only", {
+    expect_error(num_na(mtcars, c("mpg", "disp")))
+    expect_error(num_na(mtcars, seq(1:20)))
+})
