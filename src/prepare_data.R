@@ -7,32 +7,31 @@ identifieds the variable with the highest correlation to the target variable. Tr
 variable and of the variable with the highest correlation to it. Creates testing data selecting only numeric columns from the third 
 sheet and selecting only the relevant columns determined for training data.
 
-Usage: download_data.R --url=<url> --file_path=<file_path> 
+Usage: prepare_data.R --file_path=<file_path> --target_value=5 
 
 Options:
     --file_path=<file_path>   Path to the data file
     --target_value=<target_value>   Column number of the analysis variable. This is the variable for which you are trying to determine its highest correlation second variable so that you can filter the data to only those two columns.
     " -> doc
-
 library(tidyverse)
 library(docopt)
 library(dplyr)
-library (gdata)
-library (GGally)
+library(gdata)
+library(GGally)
 library(reshape)
 
 get_data <- function (file_path, sheet_index) {
-    read.xls(xls=file_path, sheet=sheet_index) %>%
+    gdata::read.xls(xls=file_path, sheet=sheet_index) %>%
         dplyr::select(where(is.numeric))
 }
 
 list_cor <- function(matrix_data, target_value) {
     result <- list()
-    n <- ncol(matrix_data)
+    n <- hyperSpec::ncol(matrix_data)
     N <- 1:n
     for (i in seq_along(N)){
         if (i != target_value) {
-            cor.result <- cor.test(matrix_data[, target_value], matrix_data[, i])
+            cor.result <- stats::cor.test(matrix_data[, target_value], matrix_data[, i])
             estimate <- cor.result$estimate
             result <- append(result, estimate)   
         } else {
@@ -68,7 +67,7 @@ main_training <- function(file_path, target_value){
     result <- highest_cor(data_training_raw, target_value)
     data_training <- assert_data(data_training_raw, result, target_value)
     return(data_training)
-    write.csv(data_training, data/data_training)
+    readr::write.csv(data_training, data/data_training)
 }
 
 main_testing <- function(file_path, target_value){
@@ -77,7 +76,7 @@ main_testing <- function(file_path, target_value){
     result <- highest_cor(data_training_raw, target_value)
     data_testing <- assert_data(data_testing_raw, result, target_value)
     return(data_testing)
-    write.csv(data_testing, data/data_testing)
+    readr::write.csv(data_testing, data/data_testing)
 }
 
 main_training(opt$file_path, !!opt$target_variable)

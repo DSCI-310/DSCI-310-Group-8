@@ -1,25 +1,21 @@
 library(testthat)
-source("../src/tests/testthat/helper-wrangle_data.r")
 
 test_that("df should be a dataframe", {
-    expect_error(wrangle_data(df_wr1))
-    expect_error(wrangle_data(df_wr2))
+    expect_error(wrangle_data(0))
+    expect_error(wrangle_data("abc"))
+    expect_error(wrangle_data(seq(1,10)))
 })
 
 test_that("`wrangle_data` returns a dataframe", {
-   expect_s3_class(wrangle_data(test_df), "data.frame")
+    expect_s3_class(wrangle_data(mtcars, mpg, disp), "data.frame")
+    expect_s3_class(wrangle_data(mtcars, mpg), "data.frame")
 })
 
 test_that("`wrangle_data` is returning correct dimension of data", {
-    expect_equivalent(ncol(wrangle_data(test_df)), 2)
+    expect_equal(ncol(wrangle_data(mtcars, mpg)), 1)
+    expect_equal(ncol(wrangle_data(mtcars, mpg, disp)), 2)
 })
 
-test_that("`wrangle_data` column names contains STG and PEG only",{
-    expect_equivalent(colnames(wrangle_data(test_df)), test_vars)
-    expect_equivalent(colnames(wrangle_data(train_df)), test_vars)
+test_that("`wrangle_data` column names contains input variables only",{
+    expect_equal(colnames(wrangle_data(mtcars, mpg)), c("mpg"))
 })
-
-test_that("`wrangle_data` selects STG and PEG data", {
-    expect_equivalent(wrangle_data(test_df), ex_test)
-    expect_equivalent(wrangle_data(train_df), ex_train)
-} )
