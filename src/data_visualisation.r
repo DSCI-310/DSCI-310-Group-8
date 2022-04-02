@@ -39,6 +39,10 @@ main <- function(df,results) {
     data_training <- read_csv(df) %>%
     user_means <- summary_fun(data_training,mean)
 
+    user_means
+    write_csv(user_means, file.path(out_dir, "means.csv"))
+
+
     maximum <- summary_fun(data_training, max)
     maximum
     readr::write_csv(maximum,

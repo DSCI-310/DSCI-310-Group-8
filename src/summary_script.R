@@ -152,7 +152,7 @@ main <- function(user_training, user_testing,results) {
                       color = "blue") +
                 ggtitle("K-NN regression fitting model between STG and PEG")
 
-    ggsave("lm_regression_plot.png",device="png", path="out_dir", width=5, height=4 )
+    ggsave("knn_regression_plot.png",device="png", path="out_dir", width=5, height=4 )
 
 
 
