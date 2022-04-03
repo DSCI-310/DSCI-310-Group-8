@@ -1,11 +1,16 @@
 ---
 title: "Student Performance Analysis Report"
-author: "Isabela Lucas Bruxellas"
+author: "Isabela Lucas Bruxellas & Tony Liang"
 date: "29/03/2022"
-output: 
-    html_document:
+output:
+    bookdown::html_document2:
         toc: true
+    bookdown::pdf_document2:
+        toc: true
+bibliography: references.bib        
+        
 ---
+
 
 ## Summary
 
@@ -37,6 +42,7 @@ knitr::opts_chunk$set(echo=FALSE,
                       warning=FALSE,
                       message=FALSE)
 library(tidyverse)
+library(tidymodels)
 library(docopt)
 library(dplyr)
 library (gdata)
@@ -45,7 +51,7 @@ library(reshape)
 ```
 
 ```{r prepare_data}
-data <- download.file("https://archive.ics.uci.edu/ml/machine-learning-databases/00257/Data_User_Modeling_Dataset_Hamdi%20Tolga%20KAHRAMAN.xls","../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xl")
+data <- download.file("https://archive.ics.uci.edu/ml/machine-learning-databases/00257/Data_User_Modeling_Dataset_Hamdi%20Tolga%20KAHRAMAN.xls","../data/raw/student_performance.xls")
 
 get_data <- function (file_path, sheet_index) {
     read.xls(xls=file_path, sheet=sheet_index) %>%
@@ -90,16 +96,16 @@ assert_data <- function(matrix_data, result, target_value){
 main_training <- function(file_path, target_value){
     data_training_raw <- get_data(file_path, 2)
     result <- highest_cor(data_training_raw, target_value)
-    data_training <- assert_data(data_training_raw, result, target_value)
-    return(data_training)
+    user_training <- assert_data(data_training_raw, result, target_value)
+    return(user_training)
 }
 
 main_testing <- function(file_path, target_value){
     data_training_raw <- get_data(file_path, 2)
     data_testing_raw <- get_data(file_path, 3)
     result <- highest_cor(data_training_raw, target_value)
-    data_testing <- assert_data(data_testing_raw, result, target_value)
-    return(data_testing)
+    user_testing <- assert_data(data_testing_raw, result, target_value)
+    return(user_testing)
 }
 
 ```
@@ -108,53 +114,52 @@ main_testing <- function(file_path, target_value){
 
 This section summarizes key characteristics and values of the explanatory variable (STG) and the response variable (PEG).
 
-Table 1 displays the means of the variables. 
+Table \@ref(tab:user-means-table) displays the means of the variables. 
 
 ---
 ```{r user-means-table}
-user-means-table <- read_csv("../../results/means.csv")
-knitr::kable(user-means-table, caption = "Table of user means")
+user_means_table <- read_csv("../results/stats/means.csv")
+knitr::kable(user_means_table, caption = "Table of user means")
 ```
 ---
 
-Table 2 displays the maxima of the variables. 
+Table \@ref(tab:user-maxima-table) displays the maxima of the variables. 
 
 ---
 ```{r user-maxima-table}
-user-maxima-table <- read_csv("../../results/maximum.csv")
-knitr::kable(user-maxima-table, caption = "Value of User maxima")
+user_maxima_table <- read_csv("../results/stats/maximum.csv")
+knitr::kable(user_maxima_table, caption = "Value of User maxima")
 ```
 ---
 
-Table 3 displays the minima of the variables. 
+Table \@ref(tab:user-minima-table) displays the minima of the variables. 
 
 ---
 ```{r user-minima-table}
-user-minima-table <- read_csv("../../results/minimum.csv")
-knitr::kable(user-minima-table, caption = "Value of User minima")
+user_minima_table <- read_csv("../results/stats/minimum.csv")
+knitr::kable(user_minima_table, caption = "Value of User minima")
 ```
 ---
 
-Tables 1-3 show that the means are 0.37 for STG and 0.46 for PEG, the maximums are 0.99 for STG and 0.93 for PEG, and minimums are 0 for STG and 0 for PEG.
+Tables \@ref(tab:user-means-table) - \@ref(tab:user-minima-table) show that the means are 0.37 for STG and 0.46 for PEG, the maximums are 0.99 for STG and 0.93 for PEG, and minimums are 0 for STG and 0 for PEG.
 
 All of these three summaries show that the values of STG and PEG are close in value and have roughly the same scale. We will not need to scale or standardize the data for linear regression, but it is still good practice to scale the data for K-NN regression, since it is extremely sensitive to differing scales of the variables.
 
----
-# Insert script 3 results n of observations and n of missing observations. I suggest that we keep the number of observations and the number of missing observations as code only and include a comment with the conclusions we draw from them. This is because it is not relevant to non programming users. 
+
 ```{r user-observations-table}
-user-observations-table <- read_csv("../../results/observations.csv")
-knitr::kable(user-means-table, caption = "Value of User maxima")
+user_observations_table <- read_csv("../results/stats/observations.csv")
+knitr::kable(user_observations_table, caption = "Numbers of Observations")
 ```
 ---
 
 ## Data Visualization 
 
-Figure 1 shows a scatterplot of PEG against STG.
+Figure \@ref(fig:peg-stg-plot) shows a scatterplot of PEG against STG.
 
 ---
 
 ```{r peg-stg-plot, out.width="50%", fig.cap = "Plot of PEG and STG"}
-knitr::include_graphics("../../results/peg_stg.png")
+knitr::include_graphics("../results/stats/peg_stg.png")
 ```
 ---
 
@@ -204,15 +209,15 @@ fit(data = user_training)
 ```
 ---
 
-Table 4 shows the model of linear regression between the STG and PEG
+Figure \@ref(fig:lm-prediction-plot) shows the model of linear regression between the STG and PEG
 
 ---
 ```{r lm-prediction-plot, out.width="50%", fig.cap = "Plot of Linear Regression"}
-knitr::include_graphics("../../results/lm_predictions.png")
+knitr::include_graphics("../results/model/lm_predictions.png")
 ```
 ---
 
-Looking at the slopes and coefficients from the Table 2 from each of the predictors, we can create our prediction model:
+Looking at the slopes and coefficients from the Figure \@ref(fig:lm-prediction-plot) from each of the predictors, we can create our prediction model:
 
 Linear Regression Model: the degree of student performance = 0.3656 + 0.2505 * the degree of study time
 
@@ -221,68 +226,63 @@ As the degree of study time increases in one unit, the degree of student perform
 We haven't declared the units of STG and PEG here since both STG and PEG are expressed in degree in the orignal dataset.
 
 
-Table 5 shows the RMSE to assess goodness of fit on the training data.
+Table \@ref(tab:lm-rmse-table) shows the RMSE to assess goodness of fit on the training data.
 
 ---
 ```{r lm-rmse-table}
-lm-rmse-table <- read_csv("../../results/lm_rmse.csv")
-knitr::kable(user-minima-table, caption = "LM RMSE table")
+lm_rmse_table <- read_csv("../results/model/lm_rmse.csv")
+knitr::kable(lm_rmse_table, caption = "LM RMSE table")
 ```
 ---
 
-Table 6 shows the RMSPE to assess how well the model predicts on the testing data.
+Table \@ref(tab:lm-rmspe-table) shows the RMSPE to assess how well the model predicts on the testing data.
 
 ---
 ```{r lm-rmspe-table}
-lm-rmse-table <- read_csv("../../results/lm_rmspe.csv")
-knitr::kable(user-minima-table, caption = "LM RMSPE table")
+lm_rmspe_table <- read_csv("../results/model/lm_rmspe.csv")
+knitr::kable(lm_rmspe_table, caption = "LM RMSPE table")
 ```
 ---
 
-Tables 5 and 6 show that the RMSE (of our training data) of linear regression is 0.249 and the RMSPE (of our testing data) of the linear regression is 0.281.
+Tables \@ref(tab:lm-rmse-table) and \@ref(tab:lm-rmspe-table) show that the RMSE (of our training data) of linear regression is 0.249 and the RMSPE (of our testing data) of the linear regression is 0.281.
 
-Figure 2 shows a visualization of our linear regression 
+Figure \@ref(fig:lm-regression-plot) shows a visualization of our linear regression 
 
 ---
 ```{r lm-regression-plot, out.width="50%", fig.cap = "Plot of Linear Regression"}
-knitr::include_graphics("../../results/lm_regression.png.png")
+knitr::include_graphics("../results/lm_regression.png.png")
+```
 ---
-
-This figure shows our linear regression model overlaid our testing data with STG on the x-axis and PEG on the y-axis.
+This figure \@ref(fig:lm-regression-plot) shows our linear regression model overlaid our testing data with STG on the x-axis and PEG on the y-axis.
 
 We can see that since the data itself is quite spread out, the plotted line of our linear regression cuts through the points, as linear regression usually does. We can see that the points are distributed relatively evenly over and under our fitted line.
 
-### K-NN Regression
-
----
-# Insert code with interpretations of intermediate steps as comments
----
-
-Table 7 shows the RMSE (of training data) of K-NN regression.
+## K-NN Regression
+Table \@ref(tab:knn-rmse-table) shows the RMSE (of training data) of K-NN regression.
 
 ---
 ```{r knn-rmse-table}
-lm-rmse-table <- read_csv("../../results/knn_rmse.csv")
-knitr::kable(user-minima-table, caption = "KNN RMSE table")
+knn_rmse_table <- read_csv("../results/model/knn_rmse.csv")
+knitr::kable(knn_rmse_table, caption = "KNN RMSE table")
 ```
 ---
 
-Table 8 shows the RMSPE (of testing data) of K-NN regression.
+Table \@ref(tab:knn-rmspe-table) shows the RMSPE (of testing data) of K-NN regression.
 
 ---
 ```{r knn-rmspe-table}
-lm-rmse-table <- read_csv("../../results/knn_rmspe.csv")
-knitr::kable(user-minima-table, caption = "KNN RMSPE table")
+knn_rmspe_table <- read_csv("../results/model/knn_rmspe.csv")
+knitr::kable(knn_rmspe_table, caption = "KNN RMSPE table")
 ```
 ---
 
-Tables 7 and 8 show that the RMSE (of training data) of K-NN regression is 0.227 and the RMSPE (of testing data) of K-NN regression is 0.257.
+Tables \@ref(tab:knn-rmse-table) and Table \@ref(tab:knn-rmspe-table) show that the RMSE (of training data) of K-NN regression is 0.227 and the RMSPE (of testing data) of K-NN regression is 0.257.
 
-Figure 3 shows a visualization of our K-NN regression.
+Figure \@ref(fig:knn-regression-plot) shows a visualization of our K-NN regression.
 
 ---
 ```{r knn-regression-plot, out.width="50%", fig.cap = "Plot of Linear Regression"}
-knitr::include_graphics("../../results/knn_regression_plot.png")
+knitr::include_graphics("../results/model/knn_regression_plot.png")
 ```
 ---
 
@@ -298,13 +298,13 @@ Looking at the visualizations of both methods, we cannot evidently see which mod
 
 As seen in the results section, the the RMSE (of our training data) of linear regression is 0.249, and the RMSPE (of our testing data) of the linear regression is 0.281. The RMSE (of training data) of K-NN regression is 0.227, and the RMSPE (of testing data) of K-NN linear regression is 0.257. By comparing the RMSE of both methods, we can see that our K-NN regression model has a slightly lower RMSE on our training data. By comparing the RMSPE of both methods, we can see that again our K-NN regression model has a slightly lower RMSPE on our testing data. Therefore, our K-NN Regression Model is slightly more accurate.
 
-Due to the higher accuracy of our K-NN Regression, our final visualization of the best model is shown in Figure 3.
+Due to the higher accuracy of our K-NN Regression, our final visualization of the best model is shown in Figure \@ref(fig:knn-regression-plot).
 
 ## Discussion 
 
 Before performing the analysis, we expected to find a positive, linear relationship between PEG and STG. The intuition was that as a student spends more time studying, they should perform better. Our analysis however, found thatthe accuracy for our linear regression model is 0.257, while the accuracy of our K-NN regression is 0.227 (where the range of degree is 1). Both of these types of regression have a prediction error percentage of about 40% (therefore our accuracy is about 60%). Our K-NN Regression model is slightly better than our linear regression due to its higher accuracy, which is consistent with the guess stated in the Methods section. The overall analysis shows that the model has relatively low accuracy.
 
-This outcome of the analysis was unexpected. However, it is consistent with the Figure 1, which shows no evidence of a relationship between these two variables. 
+This outcome of the analysis was unexpected. However, it is consistent with the Figure \@ref(fig:peg-stg-plot) , which shows no evidence of a relationship between these two variables. 
 
 As mentioned in the Introduction, we had initially believed the accuracy of our K-NN regression to be about 80%. However, the tested accuracy was only of about 60%. Since there are no missing observations in our data set, there may be several reasons causing this difference in estimated accuracy and the actual accuracy calculated. On one hand, this can be attributed to the fact that exam performance could be affected by other external factors such as health condition, student IQ, stress levels, learning ability, etc. that were not in the data set. On the other hand, we can also say that our data set may not be big enough to directly draw a relationship between just study time and exam performance.Future studies could seek out other forms of prediction that can predict using multiple factors or find a larger data set with more observations.
 
