@@ -1,7 +1,7 @@
 # author Anam HIra , Tony Liang
 # date: 2022-03-28
 
-"Script tfhat reads data from the second script and performs the modelling and saves teh figures.
+"Script that reads data from the second script and performs the modelling and saves the figures.
 
 Usage: src/summary_script.R --user_training=<training> --user_testing==<testing> --results=<results>
 
@@ -29,7 +29,7 @@ main <- function(user_training, user_testing,results) {
     if (!dir.exists(results)) {
     dir.create(results)
   }
-    user_training <- read_csv(user_training)
+    user_training <- read_csv(user_training) 
     user_testing <- read_csv(user_testing)
     lm_spec <- linear_reg() %>%
         set_engine("lm") %>%
