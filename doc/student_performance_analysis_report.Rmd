@@ -51,63 +51,8 @@ library(reshape)
 ```
 
 ```{r prepare_data}
-data <- download.file("https://archive.ics.uci.edu/ml/machine-learning-databases/00257/Data_User_Modeling_Dataset_Hamdi%20Tolga%20KAHRAMAN.xls","../data/raw/student_performance.xls")
-
-get_data <- function (file_path, sheet_index) {
-    read.xls(xls=file_path, sheet=sheet_index) %>%
-        dplyr::select(where(is.numeric))
-}
-
-list_cor <- function(matrix_data, target_value) {
-    result <- list()
-    n <- ncol(matrix_data)
-    N <- 1:n
-    for (i in seq_along(N)){
-        if (i != target_value) {
-            cor.result <- cor.test(matrix_data[, target_value], matrix_data[, i])
-            estimate <- cor.result$estimate
-            result <- append(result, estimate)   
-        } else {
-            result <- append(result, 0)
-        }
-    }
-    return(result)
-}
-
-highest_cor <- function(matrix_data, target_value) {
-    result <- list_cor(matrix_data, target_value) 
-    n <- ncol(matrix_data)
-    N <- 1:n
-    cor <- 0 
-    for (c in result){
-        if (c > cor){
-            cor <- c
-        }
-    }
-    return(match(cor, result))
-}
-
-assert_data <- function(matrix_data, result, target_value){
-    asserted_data <- matrix_data %>%
-        select(result, target_value)
-    return (asserted_data)     
-}
-
-main_training <- function(file_path, target_value){
-    data_training_raw <- get_data(file_path, 2)
-    result <- highest_cor(data_training_raw, target_value)
-    user_training <- assert_data(data_training_raw, result, target_value)
-    return(user_training)
-}
-
-main_testing <- function(file_path, target_value){
-    data_training_raw <- get_data(file_path, 2)
-    data_testing_raw <- get_data(file_path, 3)
-    result <- highest_cor(data_training_raw, target_value)
-    user_testing <- assert_data(data_testing_raw, result, target_value)
-    return(user_testing)
-}
-
+user_training <- read_csv("../data/processed/train_data.csv")
+user_testing <- read_csv("../data/processed/test_data.csv")
 ```
 
 ## Summary Data
@@ -250,7 +195,8 @@ Figure \@ref(fig:lm-regression-plot) shows a visualization of our linear regress
 
 ---
 ```{r lm-regression-plot, out.width="50%", fig.cap = "Plot of Linear Regression"}
-knitr::include_graphics("../results/lm_regression.png.png")
+# This is correct, fix the previous lm prediction 
+knitr::include_graphics("../results/model/lm_predictions.png")
 ```
 ---
 This figure \@ref(fig:lm-regression-plot) shows our linear regression model overlaid our testing data with STG on the x-axis and PEG on the y-axis.
@@ -281,7 +227,7 @@ Tables \@ref(tab:knn-rmse-table) and Table \@ref(tab:knn-rmspe-table) show that 
 Figure \@ref(fig:knn-regression-plot) shows a visualization of our K-NN regression.
 
 ---
-```{r knn-regression-plot, out.width="50%", fig.cap = "Plot of Linear Regression"}
+```{r knn-regression-plot, out.width="50%", fig.cap = "Plot of K-NN Regression"}
 knitr::include_graphics("../results/model/knn_regression_plot.png")
 ```
 ---
@@ -317,13 +263,3 @@ How do other factors (such as repetition, knowledge level, etc.) contribute to e
 Can a similar approach be used in the industry to predict workers' performance based on their working time? How?
 
 ## References
-
-Colak, I., Sagiroglu, S., & Kahraman, H. T. (2008, December). A user modeling approach to web based adaptive educational hypermedia systems. In 2008 Seventh International Conference on Machine Learning and Applications (pp. 694-699). IEEE.
-
-H. T. Kahraman, Sagiroglu, S., Colak, I., Developing intuitive knowledge classifier and modeling of users' domain dependent data in web, Knowledge Based Systems, vol. 37, pp. 283-295, 2013.
-
-Kahraman, H. T. (2009). Designing and Application of Web-Based Adaptive Intelligent Education System. Gazi University Ph. D. Thesis, Turkey, 1-156.
-
-Tsiriga, V., & Virvou, M. (2004). A framework for the initialization of student models in web-based intelligent tutoring systems. User Modeling and User-Adapted Interaction, 14(4), 289-316.
-
-UCI Machine Learning Repository: User Knowledge Modeling Data Set. (2009, October). Machine Learning Repository. Retrieved Novermber 6, 2021, from https://archive.ics.uci.edu/ml/datasets/User+Knowledge+Modeling
