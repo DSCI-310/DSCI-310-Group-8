@@ -3,12 +3,11 @@
 
 "This script downloads the data from the internet and saves it locally.
 
-Usage: download_data.R --url=<url> --file_path=<file_path> --file_name=<file_name>
+Usage: src/download_data.R --url=<url> --out_dir=<out_dir>
 
 Options:
     --url=<url>               Url to download data
-    --file_path=<file_path>   Path to the data file
-    --file_name=<file_name>   Name to call the file
+    --out_dir=<out_dir>       Path of where to save the data
     " -> doc
 
 library(tidyverse)
@@ -16,15 +15,6 @@ library(docopt)
 
 opt <- docopt(doc)
 
-main <- function(url, file_path, file_name) {
-if (!dir.exists(file_path)) {
-    dir.create(file_path)
-}    
-
-data <- download.file(url,paste0(file_path, file_name))
-
-}
-
-main(opt[["--url"]], opt[["--file_path"]], opt[["--file_name"]])
+download.file(opt$url, opt$out_dir)
 
 
