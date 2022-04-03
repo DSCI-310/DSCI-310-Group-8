@@ -1,9 +1,9 @@
 # author Anam HIra , Tony Liang
 # date: 2022-03-28
 
-"Script tfhat reads data from the second script and performs the modelling and saves teh figures 
+"Script that reads data from the second script and performs the modelling and saves the figures.
 
-Usage: summary_script.r --user_training=<training> --user_testing==<testing> --results=<out_dir>
+Usage: src/summary_script.R --user_training=<training> --user_testing==<testing> --results=<results>
 
 Options:
 -user_training=<training>     Path (including filename) to training data
@@ -21,6 +21,7 @@ library(broom)
 library(rlang)
 library(testthat)
 options(repr.matrix.max.rows = 6)
+source("src/R/visualize_vars.R")
 
 opt <- docopt(doc)
 main <- function(user_training, user_testing,results) {
@@ -28,7 +29,7 @@ main <- function(user_training, user_testing,results) {
     if (!dir.exists(results)) {
     dir.create(results)
   }
-    user_training <- read_csv(user_training)
+    user_training <- read_csv(user_training) 
     user_testing <- read_csv(user_testing)
     lm_spec <- linear_reg() %>%
         set_engine("lm") %>%
@@ -39,7 +40,7 @@ main <- function(user_training, user_testing,results) {
     performance_fit <- workflow() %>%
     add_recipe(performance_recipe) %>%
     add_model(lm_spec) %>%
-    fit(data = train_data)
+    fit(data = user_training)
 
 
     performance_fit
@@ -49,19 +50,21 @@ main <- function(user_training, user_testing,results) {
         bind_cols(user_training) %>%
         metrics(truth = PEG ,estimate = .pred) %>%
         filter(.metric == "rmse") %>%
-        select(.estimate) 
+        select(.estimate) %>%
+        as.data.frame()
     lm_rmse
-    write_csv(lm_rmse,
-            file.path(out_dir, "lm_rmse.csv"))
+    readr::write_csv(lm_rmse,
+            paste0(results, "/lm_rmse.csv"))
     lm_rmspe <- performance_fit %>%
         predict(user_testing) %>%
         bind_cols(user_testing) %>%
         metrics(truth = PEG ,estimate = .pred) %>%
         filter(.metric == "rmse") %>%
-        select(.estimate) 
+        select(.estimate) %>%
+        as.data.frame()
     lm_rmspe
-    write_csv(lm_rmspe,
-            file.path(out_dir, "lm_rmspe.csv"))
+    readr::write_csv(lm_rmspe,
+            paste0(results, "/lm_rmspe.csv"))
 
     performance_knn_recipe <- recipe(PEG ~., data = user_training) %>%
                         step_center(all_predictors()) %>%
@@ -87,10 +90,11 @@ main <- function(user_training, user_testing,results) {
     kmin <- performance_knn_results %>%
                filter(.metric == 'rmse') %>%
                filter(mean == min(mean))  %>% 
-               pull(neighbors)
+               pull(neighbors) %>%
+               as.data.frame()
     kmin    
-    write_csv(kmin,
-            file.path(out_dir, "kmin.csv"))
+    readr::write_csv(kmin,
+            paste0(results, "/kmin.csv"))
 
     performance_spec_knn <- nearest_neighbor(weight_func = "rectangular", neighbors = kmin) %>%
     set_engine("kknn") %>%
@@ -105,22 +109,24 @@ main <- function(user_training, user_testing,results) {
     predict(user_training) %>%
     bind_cols(user_training) %>%
     metrics(truth = PEG, estimate = .pred)%>%
-    filter(.metric == 'rmse') 
+    filter(.metric == 'rmse')  %>%
+    as.data.frame()
 
     knn_rmse
 
-    write_csv(knn_rmse,
-            file.path(out_dir, "knn_rmse.csv"))
+    readr::write_csv(knn_rmse,
+            paste0(results, "/knn_rmse.csv"))
 
     knn_rmspe <- performance_fit_knn %>%
     predict(user_testing) %>%
     bind_cols(user_testing) %>%
     metrics(truth = PEG, estimate = .pred)%>%
-    filter(.metric == 'rmse') 
+    filter(.metric == 'rmse') %>%
+    as.data.frame()
     knn_rmspe
 
-    write_csv(rmspe,
-            file.path(out_dir, "knn_rmspe.csv"))
+    readr::write_csv(knn_rmspe,
+            paste0(results, "/knn_rmspe.csv"))
 
 
     lm_predictions <- user_training %>%
@@ -132,7 +138,7 @@ main <- function(user_training, user_testing,results) {
         ggtitle("Linear regression fitting model between STG and PEG")+
         theme(text = element_text(size = 14))
     lm_predictions
-    ggsave("lm_predictions.png",device="png", path="out_dir", width=5, height=4 )
+    ggsave("lm_predictions.png",device="png", path="results/model", width=5, height=4 )
 
     knn_pred <- performance_fit_knn %>%
     predict(user_training) %>%
@@ -144,15 +150,7 @@ main <- function(user_training, user_testing,results) {
                       color = "blue") +
                 ggtitle("K-NN regression fitting model between STG and PEG")
 
-    ggsave("knn_regression_plot.png",device="png", path="out_dir", width=5, height=4 )
-
-
-
-    
-    
-
-
-
+    ggsave("knn_regression_plot.png",device="png", path="results/model", width=5, height=4 )
 
 }   
 
