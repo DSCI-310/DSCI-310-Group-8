@@ -92,6 +92,3 @@ main_testing(opt[["--file_path"]], 5, opt[["--dest_path"]])
 
 #main_training("../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls", 5)
 #main_testing("../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls", 5)
-
-
-
