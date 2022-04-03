@@ -1,9 +1,9 @@
 
    
-# author: Anam Hira
+# author: Anam Hira, Tony Liang
 # date: 2022-04-01
 
-rmd: results/stats/peg_stg.png results/stats/maximum.csv results/stats/minumum.csv results/stats/observations.csv results/model/lm_rmse.csv results/model/lm_rmspe.csv results/model/kmin.csv results/model/knn_rmspe.csv results/model/lm_predictions.png results/model/knn_regressions_plot.png doc/analysis/report.html doc/analysis/report.pdf
+all: results/stats/peg_stg.png results/stats/maximum.csv results/stats/minumum.csv results/stats/observations.csv results/model/lm_rmse.csv results/model/lm_rmspe.csv results/model/kmin.csv results/model/knn_rmspe.csv results/model/lm_predictions.png results/model/knn_regressions_plot.png doc/student_performance_analysis_report.html doc/student_performance_analysis_report.pdf
 
 
 # generate figures and objects for report
@@ -23,7 +23,7 @@ results/model/lm_rmse.csv results/model/lm_rmspe.csv results/model/kmin.csv resu
 
 
 # render R Markdown report in HTML and PDF
-doc/analysis/report.html doc/analysis/report.pdf: doc/student_performance_analysis_report.Rmd doc/references.bib
+doc/student_performance_analysis_report.html doc/student_performance_analysis_report.pdf: doc/student_performance_analysis_report.Rmd doc/references.bib
 	Rscript -e "rmarkdown::render('doc/student_performance_analysis_report.Rmd', c('bookdown::html_document2', 'bookdown::pdf_document2'))"
 
 # render Jupyter Book report in HTML and PDF
