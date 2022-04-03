@@ -8,15 +8,18 @@ rmd: results/peg_stg.png results/maximum.csv results/minumum.csv results/observa
 
 # generate figures and objects for report
 
-workflow: Rscript src/download_data.R
+# download data
+data/raw/cleveland_raw.csv: src/download_data.r
+	Rscript src/download_data.r --url=https://archive.ics.uci.edu/ml/machine-learning-databases/00257/Data_User_Modeling_Dataset_Hamdi%20Tolga%20KAHRAMAN.xls --file_path=data/raw/student_performance.xls
 
 prepare: Rscript src/prepare_data.R
+	Rscript src/prepare_data.r --file_path=data/raw/student_performance.xls --target_value=5 
 
-results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv  : src/data_visualisation.R
-	Rscript src/data_visualisation.R --df="../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls" --results="results"
+results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv: src/data_visualisation.R
+	Rscript src/data_visualisation.R --df=data/raw/student_performance.xls --results=/results
 
-results/lm_rmse.csv results/lm_rmspe.csv results/kmin.csv results/knn_rmspe.csv results/lm_predictions.png results/knn_regressions_plot.png: source/summary_script.R
-	Rscript src/summary_script.R --user_training="../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls" --user_testing="../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls" --results="/results"
+results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv: src/summary_script.R
+	Rscript src/summary_script.R --user_training=data/processed/data_training.csv --user_testing=data/processed/data_testing.csv --results=/results
 
 
 # render R Markdown report in HTML and PDF

@@ -1,15 +1,16 @@
-# author Anam HIra
+# author Anam HIra , Tony Liang
 # date: 2022-03-28
 
-"Script tfhat reads data from the second script and performs the modelling and saves teh figures "
+"Script tfhat reads data from the second script and performs the modelling and saves teh figures 
 
-"Usage src/summary_script.r --user_testing<testing> --user_training=<train> --results=<out_dir>"
+Usage: summary_script.r --user_training=<training> --user_testing==<testing> --results=<out_dir>
 
-"Options:
+Options:
 -user_training=<training>     Path (including filename) to training data
 -user_testing=<testing>     Path (including filename) to testing data
---results=<results> Path to directory where the plots should be saved"
+--results=<results> Path to directory where the plots should be saved" -> doc
 library(tidyverse)
+library(docopt)
 library(digest)
 library(repr)
 library(tidymodels)
@@ -20,24 +21,15 @@ library(broom)
 library(rlang)
 library(testthat)
 options(repr.matrix.max.rows = 6)
-source("../src/R/load_data.R")
-source("../src/R/wrangle_data.R")
-source("../src/R/summary_fun.R")
-source("../src/R/num_na.R")
-source("../src/R/visualize_vars.R")
-source("../src/tests/testthat/test-load_data.R")
-source("../src/tests/testthat/test-num_na.R")
-source("../src/tests/testthat/test-summary_fun.R")
-source("../src/tests/testthat/test-wrangle_data.R")
-source("../src/tests/testthat/test-visualize_vars.R")
+
 opt <- docopt(doc)
 main <- function(user_training, user_testing,results) {
     
     if (!dir.exists(results)) {
     dir.create(results)
   }
-    user_training <- read_feather(user_training)
-    user_testing <- read_feather(user_testing)
+    user_training <- read_csv(user_training)
+    user_testing <- read_csv(user_testing)
     lm_spec <- linear_reg() %>%
         set_engine("lm") %>%
         set_mode("regression")

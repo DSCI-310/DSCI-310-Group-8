@@ -20,6 +20,9 @@ library(gdata)
 library(GGally)
 library(reshape)
 
+
+opt <- docopt(doc)
+
 get_data <- function (file_path, sheet_index) {
     gdata::read.xls(xls=file_path, sheet=sheet_index) %>%
         dplyr::select(where(is.numeric))
@@ -60,14 +63,12 @@ assert_data <- function(matrix_data, result, target_value){
     return (asserted_data)     
 }
 
-opt <- docopt(doc)
-
 main_training <- function(file_path, target_value){
     data_training_raw <- get_data(file_path, 2)
     result <- highest_cor(data_training_raw, target_value)
     data_training <- assert_data(data_training_raw, result, target_value)
     return(data_training)
-    readr::write.csv(data_training, data/data_training)
+    readr::write.csv(data_training, "/data/processed/data_training.csv")
 }
 
 main_testing <- function(file_path, target_value){
@@ -76,14 +77,14 @@ main_testing <- function(file_path, target_value){
     result <- highest_cor(data_training_raw, target_value)
     data_testing <- assert_data(data_testing_raw, result, target_value)
     return(data_testing)
-    readr::write.csv(data_testing, data/data_testing)
+    readr::write.csv(data_testing, "/data/processed/data_testing.csv")
 }
 
-main_training(opt$file_path, !!opt$target_variable)
-main_testing(opt$file_path, !!opt$target_variable)
+main_training(opt$file_path, 5)
+main_testing(opt$file_path, 5)
 
-main_training("../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls", 5)
-main_testing("../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls", 5)
+#main_training("../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls", 5)
+#main_testing("../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls", 5)
 
 
 
