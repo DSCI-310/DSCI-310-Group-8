@@ -19,7 +19,8 @@ main <- function(url, file_path) {
     path <- paste0(fun[[1]][1], "/", fun[[1]][2])
     file <- fun[[1]][3]
     if(!dir.exists(path)) {
-        dir.create(path, recursive = TRUE)
+        dir.create(path, 
+                   )
     }
 data <- download.file(url,paste0(path, "/",file))
 
