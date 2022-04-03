@@ -3,7 +3,7 @@
 # author: Anam Hira
 # date: 2022-04-01
 
-rmd: results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv results/lm_predictions.png results/lm_rmse.csv results/ analysis/report.pdf
+rmd: results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv results/lm_rmse.csv results/lm_rmspe.csv results/kmin.csv results/knn_rmspe.csv results/lm_predictions.png results/knn_regressions_plot.png results/analysis/report.pdf
 
 
 # generate figures and objects for report
@@ -16,10 +16,10 @@ prepare: Rscript src/prepare_data.R
 	Rscript src/prepare_data.r --file_path=data/raw/student_performance.xls --target_value=5 
 
 results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv: src/data_visualisation.R
-	Rscript src/data_visualisation.R --df=../data/data_training.csv --results=/results
+	Rscript src/data_visualisation.R --df=data/raw/student_performance.xls --results=/results
 
 results/peg_stg.png results/maximum.csv results/minumum.csv results/observations.csv: src/summary_script.R
-	Rscript src/summary_script.R --user_training=../data/data_training.csv --user_testing=../data/data_testing.csv --results=/results
+	Rscript src/summary_script.R --user_training=data/processed/data_training.csv --user_testing=data/processed/data_testing.csv --results=/results
 
 
 # render R Markdown report in HTML and PDF
