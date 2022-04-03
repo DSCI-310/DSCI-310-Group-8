@@ -1,4 +1,6 @@
-# DSCI-310-Group-8
+# Exam Performance Predictor
+## DSCI 310 Group 8
+
 ## Group members
 
 Contributors: 
@@ -6,9 +8,6 @@ Contributors:
 - Tony Liang (39356993)
 - Xue Wang (50938547)
 - Anam Hira (67844266)
-
-## Project Title
-Using the Regression to Predict the Student Exam Performance by Study Time
 
 ## Project Summary 
 In this project, we will explore and predict students' exam performance about Electrical DC Machines based on their study time by using linear regression (LN) and the K-nearest neighbors (K-NN) algorithm.  This result could help students gain insight into the necessary study time for specific scores as well as help instructors better understand the performance of students.
@@ -38,37 +37,37 @@ git clone https://github.com/DSCI-310/DSCI-310-Group-8
 ```
 docker run -p 8888:8888 -v /$(pwd):/opt/notebooks anamhira47/group8project
 ```
-3- click the last link such as
+Warning: If after running this code you get a message saying that the port is already being allocated, simply change the 8888 BEFORE the colon to any other 4 digit number.
+
+### Cloning in the Jupyterlab GUI
+
+3- Open up a web browser provided in your terminal and access JupyterLab. Ensure that you are in the root directory of your computer. 
+
+4- Navigate to the git buttom (diamond shape) on the left side menu bar and click on "Clone a Repository". 
+
+5- Click on the green code buttom of the repository - https://github.com/DSCI-310/DSCI-310-Group-8 -  and copy the HTTPS link there. 
+
+6- Paste that into the clone repository on Jupyterlab 
+
+### Alternative ways to run the analysis 
+
+To clone this repository in the terminal command line follow the instructions provided here: https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
+
+To clone this repository without a docker. First, clone the repository and locally install all dependencies listed. 
+
+### Making the file 
+
+7- Navigate to the root of the project and run the following command
 
 ```
- http://127.0.0.1:8888/lab?token=22205c1b665b8e6ba27542800fff06e73820a5904597d336
- 
+make all
 ```
-in the terminal and open the link in the Google Chrome
 
-4- open the any documents in the Jupyter Notebook through the link
-
-### How to run this project interactively 
-
-This is used to interactively run Jupyter lab inside the DSCI-310/DSCI-310-Group-8 Docker container 
-
-1- Clone this GitHub repository 
-2- Open the terminal and navigate to the root of this project
-3- Build the image in the directory of the dockerfile by typing: 
+8- Remove all of the files created by that (such as the results folder), run the following
 
 ```
-docker build -t group8Project
+make clean
 ```
-4- Run the following code on the command line to start running the project in Jupyter Notebook:
-
-```
-docker run --rm -it -p 8888:8888 group8Project
-```
-5- In Jupyter lab, open analysis/student_performance_analysis.ipynb and click Kernel > Restart and runall to run the entire analysis
-6- Collaborate on the analysis while making sure to follow the all documentation, including but not limited to the Code of Conduct and Contributing
-7- After the work session, type docker-compose down to remove the dangling container.
-
-Attention: The dependencies version has been listed below. In order to properly run this project, ensure that you are using the same versions when running the project in the Dockerfile.
 
 ## Dependencies
 R version 4.1.1, Jupyter and R packages listed in <code>environment.yml
