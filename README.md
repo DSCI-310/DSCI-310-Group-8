@@ -36,7 +36,7 @@ git clone https://github.com/DSCI-310/DSCI-310-Group-8
 2- Open the terminal and run the following in the terminal
 
 ```
-docker run -p 8888:8888 -v /$(pwd):/opt/notebooks anamhira47/group8project
+docker run --rm -p 8888:8888 -v /$(pwd):/opt/notebooks anamhira47/group8project
 ```
 3- click the last link such as
 
