@@ -8,7 +8,7 @@ all: data/raw/student_performance.xls data/processed/train_data.csv data/process
 
 # download data
 data/raw/student_performance.xls: src/download_data.R
-	Rscript src/download_data.R --url=https://archive.ics.uci.edu/ml/machine-learning-databases/00257/Data_User_Modeling_Dataset_Hamdi%20Tolga%20KAHRAMAN.xls --file_path=data/raw/student_performance.xls
+	Rscript src/download_data.R --url=https://archive.ics.uci.edu/ml/machine-learning-databases/00257/Data_User_Modeling_Dataset_Hamdi%20Tolga%20KAHRAMAN.xls --out_dir=data/raw/student_performance.xls
 
 data/processed/train_data.csv data/processed/test_data.csv: src/prepare_data.R 
 	Rscript src/prepare_data.R --file_path=data/raw/student_performance.xls --target_value=5 --dest_path=data/processed

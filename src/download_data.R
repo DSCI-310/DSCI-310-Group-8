@@ -14,8 +14,8 @@ library(tidyverse)
 library(docopt)
 
 opt <- docopt(doc)
-main <- function(url, file_path) {
-    fun <- str_split(file_path, "/")
+main <- function(url, out_dir) {
+    fun <- stringr::str_split(out_dir, "/")
     path <- paste0(fun[[1]][1], "/", fun[[1]][2])
     file <- fun[[1]][3]
     if(!dir.exists(path)) {
@@ -23,6 +23,6 @@ main <- function(url, file_path) {
     }
 data <- download.file(url,paste0(path, "/",file))
 }
-main(opt[["--url"]],opt[["--file_path"]])
+main(opt[["--url"]],opt[["--out_dir"]])
 
 
