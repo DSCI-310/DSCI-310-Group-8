@@ -2,8 +2,7 @@ FROM ubcdsci/jupyterlab:v0.9.0
 
 # Install Jupyter, JupterLab, R & the IRkernel
 # Packages and versions specificed in environment.yml
-#COPY environment.yml .
-#RUN conda env update --file environment.yml
+
 ADD environment.yml environment.yml
 RUN conda env create -f environment.yml
 # Pull the environment name out of the environment.yml
