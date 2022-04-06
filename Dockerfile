@@ -2,9 +2,8 @@ FROM ubcdsci/jupyterlab:v0.9.0
 
 # Install Jupyter, JupterLab, R & the IRkernel
 # Packages and versions specificed in environment.yml
-
 ADD environment.yml environment.yml
 RUN conda env create -f environment.yml
-# Pull the environment name out of the environment.yml
-RUN echo "source activate $(head -1 environment.yml | cut -d' ' -f2)" > ~/.bashrc
-ENV PATH /opt/conda/envs/$(head -1 denvironment.yml | cut -d' ' -f2)/bin:$PATH
+# Activate conda environment on startup
+RUN conda env create --force -f environment.yml
+RUN echo "conda activate group8" >> ~/.profile
