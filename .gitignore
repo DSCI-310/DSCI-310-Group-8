@@ -1,4 +1,6 @@
-
-.ipynb_checkpoints/student_performance_analysis-checkpoint.ipynb
+.DS_Store
+.virtual_documents/
+*.ipynb_checkpoints/
 .Rproj.user
+.Rhistory
 analysis/.ipynb_checkpoints/student_performance_analysis-checkpoint.ipynb

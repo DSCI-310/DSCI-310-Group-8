@@ -1,4 +1,4 @@
-# author: Isabela Lucas Bruxellas
+# author: Isabela Lucas Bruxellas, Tony Liang
 # date: 2022-03-24
 
 "Accesses the dataset downloaded in the first script. Reads the second and third sheets of the dataset and selects only the numeric 
@@ -7,12 +7,15 @@ identifieds the variable with the highest correlation to the target variable. Tr
 variable and of the variable with the highest correlation to it. Creates testing data selecting only numeric columns from the third 
 sheet and selecting only the relevant columns determined for training data.
 
-Usage: prepare_data.R --file_path=<file_path> --target_value=5 
+Usage: src/prepare_data.R --file_path=<file_path> --target_value=<target_value> --dest_path=<dest_path>
 
 Options:
     --file_path=<file_path>   Path to the data file
     --target_value=<target_value>   Column number of the analysis variable. This is the variable for which you are trying to determine its highest correlation second variable so that you can filter the data to only those two columns.
+    --dest_path=<dest_path> Path to store processed data
+    
     " -> doc
+
 library(tidyverse)
 library(docopt)
 library(dplyr)
@@ -20,6 +23,8 @@ library(gdata)
 library(GGally)
 library(reshape)
 
+
+opt <- docopt(doc)
 get_data <- function (file_path, sheet_index) {
     gdata::read.xls(xls=file_path, sheet=sheet_index) %>%
         dplyr::select(where(is.numeric))
@@ -60,30 +65,29 @@ assert_data <- function(matrix_data, result, target_value){
     return (asserted_data)     
 }
 
-opt <- docopt(doc)
-
-main_training <- function(file_path, target_value){
+main_training <- function(file_path, target_value, dest_path){
+     if (!dir.exists(dest_path)) {
+        dir.create(file.path(c:data, processed, recursive = TRUE))
+     } 
     data_training_raw <- get_data(file_path, 2)
     result <- highest_cor(data_training_raw, target_value)
     data_training <- assert_data(data_training_raw, result, target_value)
-    return(data_training)
-    readr::write.csv(data_training, data/data_training)
+    data_train_write <- utils::write.csv(data_training, paste0(dest_path, "/train_data.csv"))
+    return (data_train_write)
 }
 
-main_testing <- function(file_path, target_value){
+main_testing <- function(file_path, target_value, dest_path){
+     if (!dir.exists(dest_path)) {
+        dir.create(file.path(c:data, processed, recursive = TRUE))
+     } 
+    
     data_training_raw <- get_data(file_path, 2)
     data_testing_raw <- get_data(file_path, 3)
     result <- highest_cor(data_training_raw, target_value)
     data_testing <- assert_data(data_testing_raw, result, target_value)
-    return(data_testing)
-    readr::write.csv(data_testing, data/data_testing)
+    data_test_write <- utils::write.csv(data_testing, paste0(dest_path, "/test_data.csv"))
+    return (data_test_write)
 }
 
-main_training(opt$file_path, !!opt$target_variable)
-main_testing(opt$file_path, !!opt$target_variable)
-
-main_training("../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls", 5)
-main_testing("../Downloads/Data_User_Modeling_Dataset_Hamdi Tolga KAHRAMAN.xls", 5)
-
-
-
+main_training(opt["--file_path"], opt["--target_value"], opt["--dest_path"])
+main_testing(opt["--file_path"], opt["--target_value"], opt["--dest_path"])

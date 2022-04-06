@@ -33,42 +33,38 @@ In this project, we use a Docker container image to make the project reproducibl
 ```
 git clone https://github.com/DSCI-310/DSCI-310-Group-8
 ```
-2- Open the terminal and run the following in the terminal
+2- Open the terminal and run the following command
 
 ```
-docker run -p 8888:8888 -v /$(pwd):/opt/notebooks anamhira47/group8project
+docker run --rm -p 8888:8888 -v /$(pwd):/opt/notebooks anamhira47/group8project
 ```
-3- click the last link such as
+3- After the command runs, copy the last link such as
 
 ```
  http://127.0.0.1:8888/lab?token=22205c1b665b8e6ba27542800fff06e73820a5904597d336
  
 ```
-in the terminal and open the link in the Google Chrome
+from the terminal. Open Google Chrome and paste the link. 
 
-4- open the any documents in the Jupyter Notebook through the link
-
-### How to run this project interactively 
-
-This is used to interactively run Jupyter lab inside the DSCI-310/DSCI-310-Group-8 Docker container 
-
-1- Clone this GitHub repository 
-2- Open the terminal and navigate to the root of this project
-3- Build the image in the directory of the dockerfile by typing: 
+4- Open the terminal on JupyterLab and run 
 
 ```
-docker build -t group8Project
+/bin/bash
 ```
-4- Run the following code on the command line to start running the project in Jupyter Notebook:
+
+5- Run 
 
 ```
-docker run --rm -it -p 8888:8888 group8Project
+make all
 ```
-5- In Jupyter lab, open analysis/student_performance_analysis.ipynb and click Kernel > Restart and runall to run the entire analysis
-6- Collaborate on the analysis while making sure to follow the all documentation, including but not limited to the Code of Conduct and Contributing
-7- After the work session, type docker-compose down to remove the dangling container.
 
-Attention: The dependencies version has been listed below. In order to properly run this project, ensure that you are using the same versions when running the project in the Dockerfile.
+6- Remove all files created by the previous command and run
+
+```
+make clean
+```
+
+Attention: The dependencies version have been listed below. In order to properly run this project, ensure that you are using the same versions when running the project in the Dockerfile.
 
 ## Dependencies
 R version 4.1.1, Jupyter and R packages listed in <code>environment.yml
