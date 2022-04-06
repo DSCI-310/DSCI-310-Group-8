@@ -23,7 +23,7 @@ library(gdata)
 library(GGally)
 library(reshape)
 
-
+installXLSXsupport()
 opt <- docopt(doc)
 get_data <- function (file_path, sheet_index) {
     gdata::read.xls(xls=file_path, sheet=sheet_index) %>%
