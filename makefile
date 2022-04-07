@@ -29,6 +29,6 @@ doc/student_performance_analysis_report.html doc/student_performance_analysis_re
 # clean
 clean:
 	rm -rf results/stats results/model
-	rm -rf data
+	rm -rf data/raw 
 	rm -rf doc/student_performance_analysis_report.html doc/student_performance_analysis_report.pdf
 

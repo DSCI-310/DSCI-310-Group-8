@@ -21,6 +21,7 @@ library(rlang)
 library(docopt)
 
 
+
 options(repr.matrix.max.rows = 6)
 source("src/R/visualize_vars.R")
 source("src/R/summary_fun.R")

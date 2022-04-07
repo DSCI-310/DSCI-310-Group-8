@@ -19,16 +19,17 @@ Options:
 library(tidyverse)
 library(docopt)
 library(dplyr)
-library(gdata)
 library(GGally)
 library(reshape)
+require(gdata)
+#gdata::installXLSXsupport()
 
-installXLSXsupport()
 opt <- docopt(doc)
 get_data <- function (file_path, sheet_index) {
     gdata::read.xls(xls=file_path, sheet=sheet_index) %>%
         dplyr::select(where(is.numeric))
 }
+
 
 list_cor <- function(matrix_data, target_value) {
     result <- list()
@@ -66,27 +67,25 @@ assert_data <- function(matrix_data, result, target_value){
 }
 
 main_training <- function(file_path, target_value, dest_path){
-     if (!dir.exists(dest_path)) {
-        dir.create(file.path(c:data, processed, recursive = TRUE))
-     } 
+    if(!dir.exists(dest_path)) {
+        dir.create(dest_path, recursive = TRUE)
+    }
     data_training_raw <- get_data(file_path, 2)
     result <- highest_cor(data_training_raw, target_value)
     data_training <- assert_data(data_training_raw, result, target_value)
-    data_train_write <- utils::write.csv(data_training, paste0(dest_path, "/train_data.csv"))
-    return (data_train_write)
+    utils::write.csv(data_training, paste0(dest_path, "/train_data.csv"))
 }
 
 main_testing <- function(file_path, target_value, dest_path){
-     if (!dir.exists(dest_path)) {
-        dir.create(file.path(c:data, processed, recursive = TRUE))
-     } 
+    if(!dir.exists(dest_path)) {
+        dir.create(dest_path, recursive = TRUE)
+    }
     
     data_training_raw <- get_data(file_path, 2)
     data_testing_raw <- get_data(file_path, 3)
     result <- highest_cor(data_training_raw, target_value)
     data_testing <- assert_data(data_testing_raw, result, target_value)
-    data_test_write <- utils::write.csv(data_testing, paste0(dest_path, "/test_data.csv"))
-    return (data_test_write)
+    utils::write.csv(data_testing, paste0(dest_path, "/test_data.csv"))
 }
 
 main_training(opt["--file_path"], opt["--target_value"], opt["--dest_path"])
