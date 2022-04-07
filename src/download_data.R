@@ -21,7 +21,9 @@ main <- function(url, out_dir) {
     if(!dir.exists(path)) {
         dir.create(path, recursive = TRUE)
     }
-data <- download.file(url,paste0(path, "/",file))
+
+download.file(url,paste0(path, "/",file, mode = "wb"))
+
 }
 main(opt[["--url"]],opt[["--out_dir"]])
 
