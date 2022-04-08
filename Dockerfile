@@ -7,3 +7,4 @@ RUN conda env create -f environment.yml
 # Activate conda environment on startup
 RUN conda env create --force -f environment.yml
 RUN echo "conda activate group8" >> ~/.profile
+RUN Rscript -e 'devtools::install_github("DSCI-310/DSCI-310-Group-8-package", force = TRUE)'

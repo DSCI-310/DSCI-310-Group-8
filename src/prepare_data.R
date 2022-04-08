@@ -21,12 +21,10 @@ library(docopt)
 library(dplyr)
 library(GGally)
 library(reshape)
-require(gdata)
-#gdata::installXLSXsupport()
 
 opt <- docopt(doc)
 get_data <- function (file_path, sheet_index) {
-    gdata::read.xls(xls=file_path, sheet=sheet_index) %>%
+    readxl::read_excel(path=file_path, sheet = sheet_index) |>
         dplyr::select(where(is.numeric))
 }
 
