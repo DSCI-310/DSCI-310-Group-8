@@ -10,7 +10,6 @@ Options:
         --out_dir=<out_dir> Path to directory where the plots should be saved
         " -> doc
 library(tidyverse)
-library(digest)
 library(repr)
 library(tidymodels)
 library(readxl)
@@ -19,17 +18,11 @@ library(GGally)
 library(broom)
 library(rlang)
 library(docopt)
-
-
-
-options(repr.matrix.max.rows = 6)
-source("src/R/visualize_vars.R")
-source("src/R/summary_fun.R")
+devtools::install_github("DSCI-310/DSCI-310-Group-8-package", force = TRUE)
 
 opt <- docopt(doc)
 
 main <- function(df,out_dir) {
-
     if (!dir.exists(out_dir)) {
         dir.create(out_dir)
   }

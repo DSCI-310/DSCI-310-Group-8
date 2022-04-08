@@ -8,21 +8,21 @@ Usage: src/summary_script.R --user_training=<training> --user_testing==<testing>
 Options:
 -user_training=<training>     Path (including filename) to training data
 -user_testing=<testing>     Path (including filename) to testing data
---results=<results> Path to directory where the plots should be saved" -> doc
+--results=<results> Path to directory where the plots should be saved
+" -> doc
+
 library(tidyverse)
 library(docopt)
-library(digest)
 library(repr)
 library(tidymodels)
 library(readxl)
 library(cowplot)
 library(GGally)
-
 library(broom)
 library(rlang)
-library(testthat)
-options(repr.matrix.max.rows = 6)
-source("src/R/visualize_vars.R")
+devtools::install_github("DSCI-310/DSCI-310-Group-8-package", force = TRUE)
+
+
 
 opt <- docopt(doc)
 main <- function(user_training, user_testing,results) {
