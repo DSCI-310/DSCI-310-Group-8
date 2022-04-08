@@ -45,9 +45,11 @@ library(tidyverse)
 library(tidymodels)
 library(docopt)
 library(dplyr)
-library (gdata)
-library (GGally)
+library(gdata)
+library(GGally)
 library(reshape)
+library(devtools)
+devtools::install_github("DSCI-310/DSCI-310-Group-8-package", force = TRUE)
 ```
 
 ```{r prepare_data}

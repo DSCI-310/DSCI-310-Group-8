@@ -2,7 +2,7 @@
 # author: Anam Hira, Tony Liang, Isabela Lucas Bruxellas
 # date: 2022-04-01
 
-all: data/raw/student_performance.xls data/processed/train_data.csv data/processed/test_data.csv results/stats/peg_stg.png results/stats/maximum.csv results/stats/minumum.csv results/stats/observations.csv results/model/lm_rmse.csv results/model/lm_rmspe.csv results/model/kmin.csv results/model/knn_rmspe.csv results/model/lm_predictions.png results/model/knn_regressions_plot.png doc/student_performance_analysis_report.html doc/student_performance_analysis_report.pdf
+all: data/raw/student_performance.xls data/processed/train_data.csv data/processed/test_data.csv results/stats/peg_stg.png results/stats/mean.csv results/stats/maximum.csv results/stats/minumum.csv results/stats/observations.csv results/model/lm_rmse.csv results/model/lm_rmspe.csv results/model/kmin.csv results/model/knn_rmspe.csv results/model/lm_predictions.png results/model/knn_regressions_plot.png doc/student_performance_analysis_report.html doc/student_performance_analysis_report.pdf
 
 # generate figures and objects for report
 
@@ -14,7 +14,7 @@ data/processed/train_data.csv data/processed/test_data.csv: src/prepare_data.R
 	Rscript src/prepare_data.R --file_path=data/raw/student_performance.xls --target_value=5 --dest_path=data/processed
 
 # visualization of statistics
-results/stats/peg_stg.png results/stats/maximum.csv results/stats/minumum.csv results/stats/observations.csv: src/data_visualisation.R
+results/stats/peg_stg.png results/stats/mean.csv results/stats/maximum.csv results/stats/minumum.csv results/stats/observations.csv: src/data_visualisation.R
 	Rscript src/data_visualisation.R --df=data/processed/train_data.csv --out_dir=results/stats
 
 # visualization of model

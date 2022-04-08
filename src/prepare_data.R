@@ -22,6 +22,8 @@ library(dplyr)
 library(GGally)
 library(reshape)
 require(gdata)
+devtools::install_github("DSCI-310/DSCI-310-Group-8-package", force = TRUE)
+
 #gdata::installXLSXsupport()
 
 opt <- docopt(doc)
