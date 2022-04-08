@@ -25,9 +25,9 @@ library(reshape)
 opt <- docopt(doc)
 get_data <- function (file_path, sheet_index) {
     readxl::read_excel(path=file_path, sheet = sheet_index) |>
-        dplyr::select(where(is.numeric))
+        dplyr::select(where(is.numeric)) |>
+        as.data.frame()
 }
-
 
 list_cor <- function(matrix_data, target_value) {
     result <- list()
@@ -59,10 +59,11 @@ highest_cor <- function(matrix_data, target_value) {
 }
 
 assert_data <- function(matrix_data, result, target_value){
-    asserted_data <- matrix_data %>%
-        select(result, target_value)
+    asserted_data <- matrix_data |>
+        dplyr::select(all_of(result), all_of(target_value))
     return (asserted_data)     
 }
+
 
 main_training <- function(file_path, target_value, dest_path){
     if(!dir.exists(dest_path)) {
@@ -73,6 +74,7 @@ main_training <- function(file_path, target_value, dest_path){
     data_training <- assert_data(data_training_raw, result, target_value)
     utils::write.csv(data_training, paste0(dest_path, "/train_data.csv"))
 }
+
 
 main_testing <- function(file_path, target_value, dest_path){
     if(!dir.exists(dest_path)) {
@@ -85,6 +87,7 @@ main_testing <- function(file_path, target_value, dest_path){
     data_testing <- assert_data(data_testing_raw, result, target_value)
     utils::write.csv(data_testing, paste0(dest_path, "/test_data.csv"))
 }
+
 
 main_training(opt["--file_path"], opt["--target_value"], opt["--dest_path"])
 main_testing(opt["--file_path"], opt["--target_value"], opt["--dest_path"])
