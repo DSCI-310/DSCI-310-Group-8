@@ -22,7 +22,7 @@ main <- function(url, out_dir) {
         dir.create(path, recursive = TRUE)
     }
 
-download.file(url,paste0(path, "/",file, mode = "wb"))
+download.file(url,paste0(path, "/",file), mode = "wb")
 
 }
 main(opt[["--url"]],opt[["--out_dir"]])

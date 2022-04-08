@@ -18,7 +18,7 @@ library(GGally)
 library(broom)
 library(rlang)
 library(docopt)
-devtools::install_github("DSCI-310/DSCI-310-Group-8-package", force = TRUE)
+#devtools::install_github("DSCI-310/DSCI-310-Group-8-package", force = TRUE)
 library(group8)
 
 opt <- docopt(doc)
