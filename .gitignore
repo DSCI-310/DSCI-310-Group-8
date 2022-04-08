@@ -4,3 +4,4 @@
 .Rproj.user
 .Rhistory
 analysis/.ipynb_checkpoints/student_performance_analysis-checkpoint.ipynb
+doc/student_performance_analysis_report.Rmd

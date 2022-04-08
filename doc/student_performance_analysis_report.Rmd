@@ -1,7 +1,7 @@
 ---
 title: "Student Performance Analysis Report"
-author: "Isabela Lucas Bruxellas & Tony Liang"
-date: "29/03/2022"
+author: "Isabela Lucas Bruxellas & Tony Liang & Xue Wang"
+date: "07/04/2022"
 output:
     bookdown::html_document2:
         toc: true
@@ -36,6 +36,7 @@ The choice to analyse the relationship between PEG and STG is owed to a correlat
 
 Thus, we pick STG as the predictor (explanatory variable) and PEG as the response variable. We first conduct a regression since our response variable is numerical. Since we are not sure which regression method (linear or K-NN) will be better at fitting our data set, we conduct both analyses and compare/contrast their prediction errors to determine the best model.
 
+## Wrangle data
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=FALSE,
@@ -61,9 +62,10 @@ user_testing <- read_csv("../data/processed/test_data.csv")
 
 This section summarizes key characteristics and values of the explanatory variable (STG) and the response variable (PEG).
 
-Table \@ref(tab:user-means-table) displays the means of the variables. 
+Table \@ref(tab:user_means_table) displays the means of the variables. 
 
 ---
+
 ```{r user-means-table}
 user_means_table <- read_csv("../results/stats/means.csv") |> 
                     select(-1)
@@ -73,7 +75,7 @@ knitr::kable(user_means_table, caption = "Table of user means")
 ```
 ---
 
-Table \@ref(tab:user-maxima-table) displays the maxima of the variables. 
+Table \@ref(tab:user_maxima_table) displays the maxima of the variables. 
 
 ---
 ```{r user-maxima-table}
@@ -85,9 +87,8 @@ knitr::kable(user_maxima_table, caption = "Value of User maxima")
 ```
 ---
 
-Table \@ref(tab:user-minima-table) displays the minima of the variables. 
+Table \@ref(tab:user_minima_table) displays the minima of the variables. 
 
----
 ```{r user-minima-table}
 user_minima_table <- read_csv("../results/stats/minimum.csv") |> 
                     select(-1)
@@ -97,12 +98,13 @@ knitr::kable(user_minima_table, caption = "Value of User minima")
 ```
 ---
 
+
 Tables \@ref(tab:user-means-table) - \@ref(tab:user-minima-table) show that the means are `r stg_mean` for STG and `r peg_mean` for PEG, the maximums are `r stg_max` for STG and `r peg_max` for PEG, and minimums are `r stg_min` for STG and `r peg_min` for PEG.
 
 All of these three summaries show that the values of STG and PEG are close in value and have roughly the same scale. We will not need to scale or standardize the data for linear regression, but it is still good practice to scale the data for K-NN regression, since it is extremely sensitive to differing scales of the variables.
 
 
-```{r user-observations-table}
+```{r user_observations_table}
 user_observations_table <- read_csv("../results/stats/observations.csv")
 knitr::kable(user_observations_table, caption = "Numbers of Observations")
 ```
@@ -110,11 +112,11 @@ knitr::kable(user_observations_table, caption = "Numbers of Observations")
 
 ## Data Visualization 
 
-Figure \@ref(fig:peg-stg-plot) shows a scatterplot of PEG against STG.
+Figure \@ref(fig:peg_stg_plot) shows a scatterplot of PEG against STG.
 
 ---
 
-```{r peg-stg-plot, out.width="50%", fig.cap = "Plot of PEG and STG"}
+```{r peg_stg_plot, out.width="50%", fig.cap = "Plot of PEG and STG"}
 knitr::include_graphics("../results/stats/peg_stg.png")
 ```
 ---
@@ -137,7 +139,7 @@ To perform the actual data analysis, we used regression to predict a student’s
 
 To visualize our final results, we plotted our predictions as a line using geom_smooth overlaid our testing data to see the relationship between the two. The x-axis is STG, and the y-axis is PEG.
 
-## Results
+## Explore Data Analysis by two methods
 
 ### Linear Regression
 
@@ -173,6 +175,22 @@ knitr::kable(lm_rmspe_table, caption = "LM RMSPE table")
 Tables \@ref(tab:lm-rmse-table) and \@ref(tab:lm-rmspe-table) show that the RMSE (of our training data) of linear regression is 0.249 and the RMSPE (of our testing data) of the linear regression is 0.281.
 
 ## K-NN Regression
+
+Figure \@ref(fig:knn-regression-plot) shows a visualization of our K-NN regression.
+
+---
+```{r knn-regression-plot, out.width="50%", fig.cap = "Plot of K-NN Regression"}
+knitr::include_graphics("../results/model/knn_regression_plot.png")
+```
+---
+
+This figure shows our K-NN regression model overlaid our testing data with STG on the x-axis and PEG on the y-axis.
+
+We can see that although the data itself is quite spread out, the plotted line of our K-NN regression tries to follow the data points by producing “wiggles”. This indicates that it is more flexible than our linear model, since it tries to follow most of the points instead of cutting through them.
+
+However, it is unclear if our model underfits or overfits the data since the testing data points themselves are spread out across the entire graph and there is a lot of randomness in our data.
+
+
 Table \@ref(tab:knn-rmse-table) shows the RMSE (of training data) of K-NN regression.
 
 ---
@@ -193,20 +211,6 @@ knitr::kable(knn_rmspe_table, caption = "KNN RMSPE table")
 
 Tables \@ref(tab:knn-rmse-table) and Table \@ref(tab:knn-rmspe-table) show that the RMSE (of training data) of K-NN regression is 0.227 and the RMSPE (of testing data) of K-NN regression is 0.257.
 
-Figure \@ref(fig:knn-regression-plot) shows a visualization of our K-NN regression.
-
----
-```{r knn-regression-plot, out.width="50%", fig.cap = "Plot of K-NN Regression"}
-knitr::include_graphics("../results/model/knn_regression_plot.png")
-```
----
-
-This figure shows our K-NN regression model overlaid our testing data with STG on the x-axis and PEG on the y-axis.
-
-We can see that although the data itself is quite spread out, the plotted line of our K-NN regression tries to follow the data points by producing “wiggles”. This indicates that it is more flexible than our linear model, since it tries to follow most of the points instead of cutting through them.
-
-However, it is unclear if our model underfits or overfits the data since the testing data points themselves are spread out across the entire graph and there is a lot of randomness in our data.
-
 ## Comparing Results
 
 Looking at the visualizations of both methods, we cannot evidently see which model is better. The linear regression model has a relatively even ratio of points above and under the fitted line, but our K-NN Regression is also flexible and follows the data points. Hence, we must rely on the calculated RMSPE to determine the better model.
@@ -215,7 +219,7 @@ As seen in the results section, the the RMSE (of our training data) of linear re
 
 Due to the higher accuracy of our K-NN Regression, our final visualization of the best model is shown in Figure \@ref(fig:knn-regression-plot).
 
-## Discussion 
+## Conclusion & Discussion 
 
 Before performing the analysis, we expected to find a positive, linear relationship between PEG and STG. The intuition was that as a student spends more time studying, they should perform better. Our analysis however, found thatthe accuracy for our linear regression model is 0.257, while the accuracy of our K-NN regression is 0.227 (where the range of degree is 1). Both of these types of regression have a prediction error percentage of about 40% (therefore our accuracy is about 60%). Our K-NN Regression model is slightly better than our linear regression due to its higher accuracy, which is consistent with the guess stated in the Methods section. The overall analysis shows that the model has relatively low accuracy.
 
