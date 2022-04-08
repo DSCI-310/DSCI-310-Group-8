@@ -60,39 +60,39 @@ user_testing <- read_csv("../data/processed/test_data.csv")
 
 This section summarizes key characteristics and values of the explanatory variable (STG) and the response variable (PEG).
 
-Table \@ref(tab:user-means-table) displays the means of the variables. 
+Table \@ref(tab:user_means_table) displays the means of the variables. 
 
 ---
-```{r user-means-table}
+```{r user_means_table}
 user_means_table <- read_csv("../results/stats/means.csv")
 knitr::kable(user_means_table, caption = "Table of user means")
 ```
 ---
 
-Table \@ref(tab:user-maxima-table) displays the maxima of the variables. 
+Table \@ref(tab:user_maxima_table) displays the maxima of the variables. 
 
 ---
-```{r user-maxima-table}
+```{r user_maxima_table}
 user_maxima_table <- read_csv("../results/stats/maximum.csv")
 knitr::kable(user_maxima_table, caption = "Value of User maxima")
 ```
 ---
 
-Table \@ref(tab:user-minima-table) displays the minima of the variables. 
+Table \@ref(tab:user_minima_table) displays the minima of the variables. 
 
 ---
-```{r user-minima-table}
+```{r user_minima_table}
 user_minima_table <- read_csv("../results/stats/minimum.csv")
 knitr::kable(user_minima_table, caption = "Value of User minima")
 ```
 ---
 
-Tables \@ref(tab:user-means-table) - \@ref(tab:user-minima-table) show that the means are 0.37 for STG and 0.46 for PEG, the maximums are 0.99 for STG and 0.93 for PEG, and minimums are 0 for STG and 0 for PEG.
+Tables \@ref(tab:user_means_table) - \@ref(tab:user-minima-table) show that the means are 0.37 for STG and 0.46 for PEG, the maximums are 0.99 for STG and 0.93 for PEG, and minimums are 0 for STG and 0 for PEG.
 
 All of these three summaries show that the values of STG and PEG are close in value and have roughly the same scale. We will not need to scale or standardize the data for linear regression, but it is still good practice to scale the data for K-NN regression, since it is extremely sensitive to differing scales of the variables.
 
 
-```{r user-observations-table}
+```{r user_observations_table}
 user_observations_table <- read_csv("../results/stats/observations.csv")
 knitr::kable(user_observations_table, caption = "Numbers of Observations")
 ```
@@ -100,11 +100,11 @@ knitr::kable(user_observations_table, caption = "Numbers of Observations")
 
 ## Data Visualization 
 
-Figure \@ref(fig:peg-stg-plot) shows a scatterplot of PEG against STG.
+Figure \@ref(fig:peg_stg_plot) shows a scatterplot of PEG against STG.
 
 ---
 
-```{r peg-stg-plot, out.width="50%", fig.cap = "Plot of PEG and STG"}
+```{r peg_stg_plot, out.width="50%", fig.cap = "Plot of PEG and STG"}
 knitr::include_graphics("../results/stats/peg_stg.png")
 ```
 ---
