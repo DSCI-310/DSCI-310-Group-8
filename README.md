@@ -38,6 +38,18 @@ git clone https://github.com/DSCI-310/DSCI-310-Group-8
 ```
 docker run --rm -p 8888:8888 -v /$(pwd):/opt/notebooks anamhira47/group8project
 ```
+
+Attention:
+Before run the docker in the terminal, please always check the latest version in the github and 
+add the version such as v0.8.0 with ":" at the end
+
+For example:
+
+```
+docker run --rm -p 8888:8888 -v /$(pwd):/opt/notebooks anamhira47/group8project:v0.8.0
+```
+
+
 3- After the command runs, copy the last link such as
 
 ```
@@ -67,7 +79,7 @@ make clean
 Attention: The dependencies version have been listed below. In order to properly run this project, ensure that you are using the same versions when running the project in the Dockerfile.
 
 ## Dependencies
-R version 4.1.1, Jupyter and R packages listed in <code>environment.yml
+R version 4.1.1, Jupyter and R packages listed in [environment.yml](https://github.com/DSCI-310/DSCI-310-Group-8/blob/main/environment.yml)
 </code>
 
 ## License
