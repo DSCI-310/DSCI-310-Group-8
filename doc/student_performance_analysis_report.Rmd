@@ -65,7 +65,10 @@ Table \@ref(tab:user-means-table) displays the means of the variables.
 
 ---
 ```{r user-means-table}
-user_means_table <- read_csv("../results/stats/means.csv")
+user_means_table <- read_csv("../results/stats/means.csv") |> 
+                    select(-1)
+stg_mean <- user_means_table[1]
+peg_mean <- user_means_table[2]
 knitr::kable(user_means_table, caption = "Table of user means")
 ```
 ---
@@ -74,7 +77,10 @@ Table \@ref(tab:user-maxima-table) displays the maxima of the variables.
 
 ---
 ```{r user-maxima-table}
-user_maxima_table <- read_csv("../results/stats/maximum.csv")
+user_maxima_table <- read_csv("../results/stats/maximum.csv") |> 
+                    select(-1)
+stg_max <- user_maxima_table[1]
+peg_max <- user_maxima_table[2]
 knitr::kable(user_maxima_table, caption = "Value of User maxima")
 ```
 ---
@@ -83,12 +89,15 @@ Table \@ref(tab:user-minima-table) displays the minima of the variables.
 
 ---
 ```{r user-minima-table}
-user_minima_table <- read_csv("../results/stats/minimum.csv")
+user_minima_table <- read_csv("../results/stats/minimum.csv") |> 
+                    select(-1)
+stg_min <- user_minima_table[1]
+peg_min <- user_minima_table[2]
 knitr::kable(user_minima_table, caption = "Value of User minima")
 ```
 ---
 
-Tables \@ref(tab:user-means-table) - \@ref(tab:user-minima-table) show that the means are 0.37 for STG and 0.46 for PEG, the maximums are 0.99 for STG and 0.93 for PEG, and minimums are 0 for STG and 0 for PEG.
+Tables \@ref(tab:user-means-table) - \@ref(tab:user-minima-table) show that the means are `r stg_mean` for STG and `r peg_mean` for PEG, the maximums are `r stg_max` for STG and `r peg_max` for PEG, and minimums are `r stg_min` for STG and `r peg_min` for PEG.
 
 All of these three summaries show that the values of STG and PEG are close in value and have roughly the same scale. We will not need to scale or standardize the data for linear regression, but it is still good practice to scale the data for K-NN regression, since it is extremely sensitive to differing scales of the variables.
 
@@ -132,46 +141,16 @@ To visualize our final results, we plotted our predictions as a line using geom_
 
 ### Linear Regression
 
----
-# Insert linear regression script with interpretations as comments
-```{r linear_regression, include=FALSE, echo=FALSE}
-lm_spec <- linear_reg() %>%
-        set_engine("lm") %>%
-        set_mode("regression")
-#Creating and assigning our linear regression model specification to an object called lm_spec.
-
-performance_recipe <- recipe(PEG~.,data = user_training)
-
-#Creating a recipe for the model and assigning it to credit_recipe.
-
-performance_fit <- workflow() %>%
-add_recipe(performance_recipe) %>%
-add_model(lm_spec) %>%
-fit(data = user_training)
-
-
-
-#Fitting our simple linear regression model by using the model specification and recipe.
-
-```
----
-
-Figure \@ref(fig:lm-prediction-plot) shows the model of linear regression between the STG and PEG
+Figure \@ref(fig:lm-regression-plot) shows a visualization of our linear regression 
 
 ---
-```{r lm-prediction-plot, out.width="50%", fig.cap = "Plot of Linear Regression"}
+```{r lm-regression-plot, out.width="50%", fig.cap = "Plot of Linear Regression"}
 knitr::include_graphics("../results/model/lm_predictions.png")
 ```
 ---
+This figure \@ref(fig:lm-regression-plot) shows our linear regression model overlaid our testing data with STG on the x-axis and PEG on the y-axis.
 
-Looking at the slopes and coefficients from the Figure \@ref(fig:lm-prediction-plot) from each of the predictors, we can create our prediction model:
-
-Linear Regression Model: the degree of student performance = 0.3656 + 0.2505 * the degree of study time
-
-As the degree of study time increases in one unit, the degree of student performance will increase by 0.2505 units.
-
-We haven't declared the units of STG and PEG here since both STG and PEG are expressed in degree in the orignal dataset.
-
+We can see that since the data itself is quite spread out, the plotted line of our linear regression cuts through the points, as linear regression usually does. We can see that the points are distributed relatively evenly over and under our fitted line.
 
 Table \@ref(tab:lm-rmse-table) shows the RMSE to assess goodness of fit on the training data.
 
@@ -192,18 +171,6 @@ knitr::kable(lm_rmspe_table, caption = "LM RMSPE table")
 ---
 
 Tables \@ref(tab:lm-rmse-table) and \@ref(tab:lm-rmspe-table) show that the RMSE (of our training data) of linear regression is 0.249 and the RMSPE (of our testing data) of the linear regression is 0.281.
-
-Figure \@ref(fig:lm-regression-plot) shows a visualization of our linear regression 
-
----
-```{r lm-regression-plot, out.width="50%", fig.cap = "Plot of Linear Regression"}
-# This is correct, fix the previous lm prediction 
-knitr::include_graphics("../results/model/lm_predictions.png")
-```
----
-This figure \@ref(fig:lm-regression-plot) shows our linear regression model overlaid our testing data with STG on the x-axis and PEG on the y-axis.
-
-We can see that since the data itself is quite spread out, the plotted line of our linear regression cuts through the points, as linear regression usually does. We can see that the points are distributed relatively evenly over and under our fitted line.
 
 ## K-NN Regression
 Table \@ref(tab:knn-rmse-table) shows the RMSE (of training data) of K-NN regression.

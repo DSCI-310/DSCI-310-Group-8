@@ -19,6 +19,7 @@ library(broom)
 library(rlang)
 library(docopt)
 devtools::install_github("DSCI-310/DSCI-310-Group-8-package", force = TRUE)
+library(group8)
 
 opt <- docopt(doc)
 
@@ -26,25 +27,28 @@ main <- function(df,out_dir) {
     if (!dir.exists(out_dir)) {
         dir.create(out_dir)
   }
+
     data_training <- read_csv(df)
-    user_means <- summary_fun(data_training,mean)
+    # Mean  
+    user_means <- group8::summary_fun(data_training,mean)
     readr::write_csv(user_means, paste0(out_dir, "/means.csv"))
-
-
-    maximum <- summary_fun(data_training, max)
-    maximum
+    
+    # Max
+    maximum <- group8::summary_fun(data_training, max)
     readr::write_csv(maximum,
             paste0(out_dir, "/maximum.csv"))
-    minimum <- summary_fun(data_training, min)
+    # Min        
+    minimum <- group8::summary_fun(data_training, min)
     readr::write_csv(minimum,
             paste0(out_dir, "/minimum.csv"))
 
+    # Obs    
     observations <- data_training %>%
     summarize(n = n())
     readr::write_csv(observations,
             paste0(out_dir, "/observations.csv"))
 
-    peg_stg <- visualize_vars(data_training, STG, PEG, alpha = 0.4)
+    peg_stg <- group8::visualize_vars(data_training, STG, PEG, alpha = 0.4)
     
     ggplot2::ggsave("peg_stg.png", device = "png", path = out_dir, width = 5, height = 4)
 }

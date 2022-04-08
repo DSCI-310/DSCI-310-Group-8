@@ -21,6 +21,7 @@ library(GGally)
 library(broom)
 library(rlang)
 devtools::install_github("DSCI-310/DSCI-310-Group-8-package", force = TRUE)
+library(group8)
 
 
 
@@ -145,7 +146,7 @@ main <- function(user_training, user_testing,results) {
     predict(user_training) %>%
     bind_cols(user_training)
 
-    knn_regression_plot <- visualize_vars(user_training, STG,PEG, alpha = 0.4) + 
+    knn_regression_plot <- group8::visualize_vars(user_training, STG,PEG, alpha = 0.4) + 
                        geom_line(data = knn_pred,
                                  mapping = aes(x = STG, y = .pred),
                       color = "blue") +
