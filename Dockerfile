@@ -13,7 +13,9 @@ RUN conda install --yes -c conda-forge\
     r-shiny=1.7.1 \
     r-tidyverse=1.3.1 \
     r-tidymodels=0.1.4 \
+    r-rlang=1.0.2 \
 
+   
 
 
 
