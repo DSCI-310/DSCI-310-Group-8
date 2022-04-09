@@ -30,7 +30,7 @@ get_data <- function (file_path, sheet_index) {
 
 list_cor <- function(matrix_data, target_value) {
     result <- list()
-    n <- hyperSpec::ncol(matrix_data)
+    n <- ncol(matrix_data)
     N <- 1:n
     for (i in seq_along(N)){
         if (i != target_value) {
@@ -46,7 +46,7 @@ list_cor <- function(matrix_data, target_value) {
 
 highest_cor <- function(matrix_data, target_value) {
     result <- list_cor(matrix_data, target_value) 
-    n <- hyperSpec::ncol(matrix_data)
+    n <- ncol(matrix_data)
     N <- 1:n
     cor <- 0 
     for (c in result){
