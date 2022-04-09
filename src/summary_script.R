@@ -13,26 +13,19 @@ Options:
 
 library(tidyverse)
 library(docopt)
-library(repr)
-library(tidymodels)
-library(readxl)
-library(cowplot)
-library(GGally)
-library(broom)
-library(rlang)
-#devtools::install_github("DSCI-310/DSCI-310-Group-8-package", force = TRUE)
 library(group8)
+library(tidymodels)
 
 
-
+set.seed(123)
 opt <- docopt(doc)
 main <- function(user_training, user_testing,results) {
     
     if (!dir.exists(results)) {
     dir.create(results)
   }
-    user_training <- read_csv(user_training) 
-    user_testing <- read_csv(user_testing)
+    user_training <- readr::read_csv(user_training) 
+    user_testing <- readr::read_csv(user_testing)
     lm_spec <- linear_reg() %>%
         set_engine("lm") %>%
         set_mode("regression")

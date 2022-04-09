@@ -13,6 +13,7 @@ Options:
 library(tidyverse)
 library(docopt)
 
+set.seed(123)
 opt <- docopt(doc)
 main <- function(url, out_dir) {
     fun <- stringr::str_split(out_dir, "/")

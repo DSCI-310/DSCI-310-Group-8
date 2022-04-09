@@ -10,19 +10,11 @@ Options:
         --out_dir=<out_dir> Path to directory where the plots should be saved
         " -> doc
 library(tidyverse)
-library(repr)
-library(tidymodels)
-library(readxl)
-library(cowplot)
-library(GGally)
-library(broom)
-library(rlang)
 library(docopt)
-#devtools::install_github("DSCI-310/DSCI-310-Group-8-package", force = TRUE)
 library(group8)
 
 opt <- docopt(doc)
-
+set.seed(123)
 main <- function(df,out_dir) {
     if (!dir.exists(out_dir)) {
         dir.create(out_dir, recursive = TRUE)
