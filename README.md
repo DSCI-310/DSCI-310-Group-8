@@ -96,6 +96,7 @@ Using R version 4.1.1, Jupyter and R packages listed here:
   r-tidyverse=1.3.1
   r-tidymodels=0.1.4
   r-rlang=1.0.2
+  r-hyperSpec=0.100.0 \
 
   
 ```
