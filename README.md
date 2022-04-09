@@ -79,6 +79,7 @@ make clean
 Attention: The dependencies version have been listed below. In order to properly run this project, ensure that you are using the same versions when running the project in the Dockerfile.
 
 ## Dependencies
+
 Using R version 4.1.1, Jupyter and R packages listed here:
 
 ```
@@ -96,8 +97,6 @@ Using R version 4.1.1, Jupyter and R packages listed here:
   r-tidymodels=0.1.4
   
 ```
-
-
 
 ## License
 This project is licensed under the MIT License and [Creative Commons Attribution-NonCommerical-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/)
