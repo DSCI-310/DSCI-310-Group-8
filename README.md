@@ -79,7 +79,7 @@ make clean
 Attention: The dependencies version have been listed below. In order to properly run this project, ensure that you are using the same versions when running the project in the Dockerfile.
 
 ## Dependencies
-R version 4.1.1, Jupyter and R packages listed here:
+Using R version 4.1.1, Jupyter and R packages listed here:
 
 ```
   r-bookdown=0.25
