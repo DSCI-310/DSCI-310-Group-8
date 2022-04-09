@@ -9,4 +9,5 @@ RUN conda env create -f environment.yml
 RUN R -e "install.packages('methods',dependencies=TRUE, repos='http://cran.rstudio.com/');
          devtools::install_github('DSCI-310/DSCI-310-Group-8-package', force = TRUE)"
 # Activate conda environment on startup
+
 RUN echo "conda activate group8" >> ~/.profile
