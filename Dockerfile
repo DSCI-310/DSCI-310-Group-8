@@ -6,7 +6,6 @@ RUN conda install --yes -c conda-forge\
     r-docopt=0.7.1 \
     r-devtools=2.4.3 \
     r-GGally=2.1.2 \
-    r-hyperSpec=0.100.0 \
     r-kknn=1.3.1 \
     r-knitr=1.37 \
     r-reshape=0.8.8 \
