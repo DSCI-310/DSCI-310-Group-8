@@ -81,8 +81,7 @@ Attention: The dependencies version have been listed below. In order to properly
 ## Dependencies
 R version 4.1.1, Jupyter and R packages listed here:
 
-  - 
-  ```
+  - ```
   r-bookdown=0.25
   r-cowplot=1.1.1
   r-docopt=0.7.1
