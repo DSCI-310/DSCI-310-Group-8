@@ -52,6 +52,7 @@ main <- function(user_training, user_testing,results) {
         bind_cols(user_training) %>%
         metrics(truth = PEG ,estimate = .pred) %>%
         filter(.metric == "rmse") %>%
+        mutate(.estimate = round(.estimate,3)) %>%
         select(.estimate) %>%
         as.data.frame()
     lm_rmse
@@ -62,6 +63,7 @@ main <- function(user_training, user_testing,results) {
         bind_cols(user_testing) %>%
         metrics(truth = PEG ,estimate = .pred) %>%
         filter(.metric == "rmse") %>%
+        mutate(.estimate = round(.estimate,3)) %>%
         select(.estimate) %>%
         as.data.frame()
     lm_rmspe
@@ -112,6 +114,7 @@ main <- function(user_training, user_testing,results) {
     bind_cols(user_training) %>%
     metrics(truth = PEG, estimate = .pred)%>%
     filter(.metric == 'rmse')  %>%
+    mutate(.estimate = round(.estimate,3)) %>%
     as.data.frame()
 
     knn_rmse
@@ -124,6 +127,7 @@ main <- function(user_training, user_testing,results) {
     bind_cols(user_testing) %>%
     metrics(truth = PEG, estimate = .pred)%>%
     filter(.metric == 'rmse') %>%
+    mutate(.estimate = round(.estimate,3)) %>%
     as.data.frame()
     knn_rmspe
 

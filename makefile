@@ -1,4 +1,3 @@
-
 # author: Anam Hira, Tony Liang, Isabela Lucas Bruxellas
 # date: 2022-04-01
 
@@ -11,7 +10,7 @@ data/raw/student_performance.xls: src/download_data.R
 	Rscript src/download_data.R --url=https://archive.ics.uci.edu/ml/machine-learning-databases/00257/Data_User_Modeling_Dataset_Hamdi%20Tolga%20KAHRAMAN.xls --out_dir=data/raw/student_performance.xls
 
 data/processed/train_data.csv data/processed/test_data.csv: src/prepare_data.R 
-	Rscript src/prepare_data.R --file_path=data/raw/student_performance.xls --target_value=5 --dest_path=data/processed
+	Rscript src/prepare_data.R --file_path=data/raw/student_performance.xls --target_value =5 --dest_path=data/processed/
 
 # visualization of statistics
 results/stats/peg_stg.png results/stats/mean.csv results/stats/maximum.csv results/stats/minumum.csv results/stats/observations.csv: src/data_visualisation.R
@@ -29,6 +28,6 @@ doc/student_performance_analysis_report.html doc/student_performance_analysis_re
 # clean
 clean:
 	rm -rf results/stats results/model
-	rm -rf data/raw 
+	rm -rf data/raw data/processed
 	rm -rf doc/student_performance_analysis_report.html doc/student_performance_analysis_report.pdf
 
