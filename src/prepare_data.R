@@ -18,15 +18,16 @@ Options:
 
 library(tidyverse)
 library(docopt)
-library(dplyr)
-library(GGally)
-library(reshape)
+
 
 opt <- docopt(doc)
+
 get_data <- function (file_path, sheet_index) {
     readxl::read_excel(path=file_path, sheet = sheet_index) |>
-        dplyr::select(where(is.numeric))
+        dplyr::select(where(is.numeric)) %>%
+        as.data.frame()
 }
+
 
 
 list_cor <- function(matrix_data, target_value) {
@@ -47,7 +48,7 @@ list_cor <- function(matrix_data, target_value) {
 
 highest_cor <- function(matrix_data, target_value) {
     result <- list_cor(matrix_data, target_value) 
-    n <- ncol(matrix_data)
+    n <- hyperSpec::ncol(matrix_data)
     N <- 1:n
     cor <- 0 
     for (c in result){
@@ -58,9 +59,9 @@ highest_cor <- function(matrix_data, target_value) {
     return(match(cor, result))
 }
 
-assert_data <- function(matrix_data, result, target_value){
+assert_data <- function(matrix_data, result, target_value) {
     asserted_data <- matrix_data %>%
-        select(result, target_value)
+    dplyr::select(all_of(result), all_of(target_value))
     return (asserted_data)     
 }
 
@@ -74,6 +75,7 @@ main_training <- function(file_path, target_value, dest_path){
     utils::write.csv(data_training, paste0(dest_path, "/train_data.csv"))
 }
 
+
 main_testing <- function(file_path, target_value, dest_path){
     if(!dir.exists(dest_path)) {
         dir.create(dest_path, recursive = TRUE)
@@ -86,5 +88,7 @@ main_testing <- function(file_path, target_value, dest_path){
     utils::write.csv(data_testing, paste0(dest_path, "/test_data.csv"))
 }
 
-main_training(opt["--file_path"], opt["--target_value"], opt["--dest_path"])
-main_testing(opt["--file_path"], opt["--target_value"], opt["--dest_path"])
+# opt[["--target_value"]]
+main_training(opt[["--file_path"]], 5 , opt[["--dest_path"]])
+main_testing(opt[["--file_path"]], 5, opt[["--dest_path"]])
+

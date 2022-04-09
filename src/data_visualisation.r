@@ -25,7 +25,7 @@ opt <- docopt(doc)
 
 main <- function(df,out_dir) {
     if (!dir.exists(out_dir)) {
-        dir.create(out_dir)
+        dir.create(out_dir, recursive = TRUE)
   }
 
     data_training <- read_csv(df)
