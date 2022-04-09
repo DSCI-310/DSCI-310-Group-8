@@ -4,8 +4,9 @@ FROM ubcdsci/jupyterlab:v0.9.0
 # Packages and versions specificed in environment.yml
 ADD environment.yml environment.yml
 RUN conda env create -f environment.yml
+
+# Installs package repository 
+RUN R -e "devtools::install_github('DSCI-310/DSCI-310-Group-8-package', force = TRUE)"
 # Activate conda environment on startup
-RUN conda env create --force -f environment.yml
+
 RUN echo "conda activate group8" >> ~/.profile
-RUN Rscript -e "install.version('devtools', version = '2.4.3', repos = 'http://cran.us.r-project.org')" -1 \
-        "require(devtools); devtools::install_github('DSCI-310/DSCI-310-Group-8-package', force = TRUE)"
