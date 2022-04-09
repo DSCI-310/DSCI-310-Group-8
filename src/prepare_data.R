@@ -19,7 +19,7 @@ Options:
 library(tidyverse)
 library(docopt)
 
-
+set.seed(123)
 opt <- docopt(doc)
 
 get_data <- function (file_path, sheet_index) {
@@ -27,8 +27,6 @@ get_data <- function (file_path, sheet_index) {
         dplyr::select(where(is.numeric)) %>%
         as.data.frame()
 }
-
-
 
 list_cor <- function(matrix_data, target_value) {
     result <- list()
@@ -61,7 +59,7 @@ highest_cor <- function(matrix_data, target_value) {
 
 assert_data <- function(matrix_data, result, target_value) {
     asserted_data <- matrix_data %>%
-    dplyr::select(all_of(result), all_of(target_value))
+    dplyr::select(dplyr::all_of(result), dplyr::all_of(target_value))
     return (asserted_data)     
 }
 
@@ -88,7 +86,6 @@ main_testing <- function(file_path, target_value, dest_path){
     utils::write.csv(data_testing, paste0(dest_path, "/test_data.csv"))
 }
 
-# opt[["--target_value"]]
 main_training(opt[["--file_path"]], 5 , opt[["--dest_path"]])
 main_testing(opt[["--file_path"]], 5, opt[["--dest_path"]])
 
