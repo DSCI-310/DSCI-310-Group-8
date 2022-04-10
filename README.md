@@ -97,6 +97,7 @@ Using R version 4.1.1, Jupyter and R packages listed here:
     r-tidymodels=0.1.4 \
     r-testthat=3.1.2 \
     r-rlang=1.0.2 \
+    r-group8=0.0.0.9000
     
 ```
 
