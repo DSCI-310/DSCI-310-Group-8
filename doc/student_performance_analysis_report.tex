@@ -1,0 +1,379 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Student Performance Analysis Report},
+  pdfauthor={Isabela Lucas Bruxellas \& Tony Liang \& Xue Wang \& Anam Hira},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Student Performance Analysis Report}
+\author{Isabela Lucas Bruxellas \& Tony Liang \& Xue Wang \& Anam Hira}
+\date{07/04/2022}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{summary}{%
+\subsection{Summary}\label{summary}}
+
+In this project, we explore and predict the exam performance of students in the subject of Electrical DC Machines based on their study time by using linear regression (LN) and the K-nearest neighbors (K-NN) algorithm. Study time is chosen for this analysis as we identify it to be the variable with the highest correlation to exam performance. The results obtained in this analysis could help students gain insight into the necessary study times for specific scores as well as help instructors better understand the performance of students.
+
+As a result of our analysis, we find that the Root mean square prediction error (RMSPE) for our LN model is 0.385, while the RMSPE of the K-NN model is 0.284. Although the K-NN model is slightly better than LN model, both types of regression have a prediction error percentage of about 40\% (therefore our accuracy is about 60\%). This can be attributed to the fact that exam performance could be affected by other external factors such as health condition, student IQ, stress levels, learning ability, learning environment and many others. It may also be indicative that the data set is not big enough to draw a relationship between just these two variables.
+
+The dataset used is the Kahraman, Sagiroglu, and Colak (2009), User Knowledge Modeling Dataset provided by UCL Machine Learning Repository. And referenced from these sources: Colak, Sagiroglu, and Kahraman (2008), Kahraman, Sagiroglu, and Colak (2013), Kahraman, Sagiroglu, and Colak (2010), Maria Virvou (2004), E. AshbyPlant and LenHillKiaAsberg (2005), Gail I. Hudson (2010). You could see citations in our reference section.
+
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+The research question of this analysis is: What will a student's exam performance be based on their study time?
+For this analysis, we use the User Knowledge Modeling Data Set, which has a total of 5 variables observed about students, in addition to the classified knowledge level of user (UNS):
+
+STG: the degree of study time for goal object materials
+SCG: the degree of repetition number of user for goal object materials
+STR: the degree of study time of user for related objects with goal object
+LPR: the exam performance of user for related objects with goal object
+PEG: the exam performance of user for goal objects
+These variables were drawn from students' learning-related activities on the web. The data was also already tidy and pre-divided into training and testing subsets.
+
+The choice to analyse the relationship between PEG and STG is owed to a correlation analysis performed while preparing the data. In this step we ran a function to test the correlation of all numeric variables against PEG and determined that STG was most highly correlated to it. The correlation was also positive which is consistent with our intuition that increasing the degree of study time would result in higher/better exam performance.
+
+Thus, we pick STG as the predictor (explanatory variable) and PEG as the response variable. We first conduct a regression since our response variable is numerical. Since we are not sure which regression method (linear or K-NN) will be better at fitting our data set, we conduct both analyses and compare/contrast their prediction errors to determine the best model.
+
+\hypertarget{wrangle-data}{%
+\subsection{Wrangle data}\label{wrangle-data}}
+
+\hypertarget{summary-data}{%
+\subsection{Summary Data}\label{summary-data}}
+
+This section summarizes key characteristics and values of the explanatory variable (STG) and the response variable (PEG).
+
+Table \ref{tab:user-means-table} displays the means of the variables.
+
+\begin{table}
+
+\caption{\label{tab:user-means-table}Table of user means}
+\centering
+\begin{tabular}[t]{r|r}
+\hline
+STG & PEG\\
+\hline
+0.37 & 0.46\\
+\hline
+\end{tabular}
+\end{table}
+
+Table \ref{tab:user-maxima-table} displays the maxima of the variables.
+
+\begin{table}
+
+\caption{\label{tab:user-maxima-table}Value of User maxima}
+\centering
+\begin{tabular}[t]{r|r}
+\hline
+STG & PEG\\
+\hline
+0.99 & 0.93\\
+\hline
+\end{tabular}
+\end{table}
+
+Table \ref{tab:user-minima-table} displays the minima of the variables.
+
+\begin{table}
+
+\caption{\label{tab:user-minima-table}Value of User minima}
+\centering
+\begin{tabular}[t]{r|r}
+\hline
+STG & PEG\\
+\hline
+0 & 0\\
+\hline
+\end{tabular}
+\end{table}
+
+Tables \ref{tab:user-means-table} - \ref{tab:user-minima-table} show that the means are 0.37 for STG and 0.46 for PEG, the maximums are 0.99 for STG and 0.93 for PEG, and minimums are 0 for STG and 0 for PEG.
+
+All of these three summaries show that the values of STG and PEG are close in value and have roughly the same scale. We will not need to scale or standardize the data for linear regression, but it is still good practice to scale the data for K-NN regression, since it is extremely sensitive to differing scales of the variables.
+
+\begin{table}
+
+\caption{\label{tab:user-observations-table}Numbers of Observations}
+\centering
+\begin{tabular}[t]{r}
+\hline
+n\\
+\hline
+258\\
+\hline
+\end{tabular}
+\end{table}
+
+Table \ref{tab:user-observations-table} shows number of observations.
+
+\hypertarget{data-visualization}{%
+\subsection{Data Visualization}\label{data-visualization}}
+
+\begin{figure}
+\includegraphics[width=0.5\linewidth]{../results/stats/peg_stg} \caption{Plot of PEG and STG}\label{fig:peg-stg-plot}
+\end{figure}
+
+Figure \ref{fig:peg-stg-plot} shows a scatterplot of PEG against STG. It shows that there isn't a clear relationship or pattern between PEG and STG. There is neither a linear/nonlinear nor a positive/negative relationship, as the points are spread out widely on the graph.
+
+Therefore, no evident relationship can be observed between these two variables.
+
+\hypertarget{methods}{%
+\subsection{Methods}\label{methods}}
+
+In order to answer our predictive question, we followed a series of steps to perform our data analysis.
+
+We first dowloaded our dataset reproducibly (students' exam performance about Electrical DC Machines) from the web. The data set was already initially split into training and data sets, so we loaded the respective sheets in. We could observe from the printed tables that the data was already tidy, since each row was a single observation, each column was a single variable, and each value was a single cell. Therefore, we did not need to do any further tidying.
+
+Next, we prepared our dataset by accessing the dataset downloaded and reads the second and third sheets of the dataset. We then created a dunction to select only the numeric columns and create the training dataset using the selected data from sheet 2 and a user-inputted target variable. The function automaticallyidentified the variable with the highest correlation to the target variable. Thus, our training data includes only the column of the target variable and of the variable with the highest correlation to it (PEC and STg). We also created the testing data selecting only numeric columns from the third sheet and selecting only the relevant columns determined for training data.
+
+We then performed relevant summaries of the data for exploratory data analysis. This included finding the means, maxima and minima, number of observations, and rows of missing data of our variables of interest (PEG and STG). This allowed us to get a better picture of the data we were working with. Following this, we created a visualization to see the relationship between our chosen variables, with STG on the x-axis and PEG on the y-axis. After plotting PEG against STG, we could not observe a strong relationship between the two, as we saw that the data points were spread out and did not follow a clear or direct relationship.
+
+To perform the actual data analysis, we used regression to predict a student's exam performance (PEG) based on their study time (STG). Since we were predicting a numerical value instead of a categorical value, we had to use regression to evaluate and create a prediction. From what we had seen from our exploratory data analysis, K-NN regression seemed to be the better choice as it would allow for more flexibility, but we tested both the accuracies of K-NN and linear regression, and compared them to find the best approach. We trained our regression with our training data and assessed its accuracy with our testing data. To assess the accuracy, we calculated the Root Mean Squared Prediction Error (RMSPE) of our model on the test data to see how well our model generalizes to future data. RMSPE is the square root of the difference between the observed and predicted value of the ith test observation, divided by the number of observations. This indicates how well our model is able to predict on unseen data.
+
+To visualize our final results, we plotted our predictions as a line using geom\_smooth overlaid our testing data to see the relationship between the two. The x-axis is STG, and the y-axis is PEG.
+
+\hypertarget{explore-data-analysis-by-two-methods}{%
+\subsection{Explore Data Analysis by two methods}\label{explore-data-analysis-by-two-methods}}
+
+\hypertarget{linear-regression}{%
+\subsection{Linear Regression}\label{linear-regression}}
+
+\begin{figure}
+\includegraphics[width=0.5\linewidth]{../results/model/lm_predictions} \caption{Plot of Linear Regression}\label{fig:lm-regression-plot}
+\end{figure}
+
+This figure \ref{fig:lm-regression-plot} shows our linear regression model overlaid our testing data with STG on the x-axis and PEG on the y-axis.
+
+We can see that since the data itself is quite spread out, the plotted line of our linear regression cuts through the points, as linear regression usually does. We can see that the points are distributed relatively evenly over and under our fitted line.
+Table \ref{tab:lm-rmse-table} shows the RMSE to assess goodness of fit on the training data.
+
+\begin{table}
+
+\caption{\label{tab:lm-rmse-table}LM RMSE table}
+\centering
+\begin{tabular}[t]{r}
+\hline
+.estimate\\
+\hline
+0.261\\
+\hline
+\end{tabular}
+\end{table}
+
+Table \ref{tab:lm-rmspe-table} shows the RMSPE to assess how well the model predicts on the testing data.
+
+\begin{table}
+
+\caption{\label{tab:lm-rmspe-table}LM RMSPE table}
+\centering
+\begin{tabular}[t]{r}
+\hline
+.estimate\\
+\hline
+0.385\\
+\hline
+\end{tabular}
+\end{table}
+
+Tables \ref{tab:lm-rmse-table} and \ref{tab:lm-rmspe-table} show that the RMSE (of our training data) of linear regression is 0.261 and the RMSPE (of our testing data) of the linear regression is 0.385.
+
+\hypertarget{k-nn-regression}{%
+\subsection{K-NN Regression}\label{k-nn-regression}}
+
+\begin{figure}
+\includegraphics[width=0.5\linewidth]{../results/model/knn_regression_plot} \caption{Plot of K-NN Regression}\label{fig:knn-regression-plot}
+\end{figure}
+
+This figure \ref{fig:knn-regression-plot} shows a visualization of our K-NN regression. shows our K-NN regression model overlaid our testing data with STG on the x-axis and PEG on the y-axis.
+
+We can see that although the data itself is quite spread out, the plotted line of our K-NN regression tries to follow the data points by producing ``wiggles''. This indicates that it is more flexible than our linear model, since it tries to follow most of the points instead of cutting through them.
+
+However, it is unclear if our model underfits or overfits the data since the testing data points themselves are spread out across the entire graph and there is a lot of randomness in our data.
+
+\begin{table}
+
+\caption{\label{tab:knn-rmse-table}KNN RMSE table}
+\centering
+\begin{tabular}[t]{l|l|r}
+\hline
+.metric & .estimator & .estimate\\
+\hline
+rmse & standard & 0.187\\
+\hline
+\end{tabular}
+\end{table}
+
+Table \ref{tab:knn-rmse-table} shows the RMSE (of training data) of K-NN regression.
+
+\begin{table}
+
+\caption{\label{tab:knn-rmspe-table}KNN RMSPE table}
+\centering
+\begin{tabular}[t]{l|l|r}
+\hline
+.metric & .estimator & .estimate\\
+\hline
+rmse & standard & 0.284\\
+\hline
+\end{tabular}
+\end{table}
+
+Table \ref{tab:knn-rmspe-table} shows the RMSPE (of testing data) of K-NN regression.
+
+Tables \ref{tab:knn-rmse-table} and \ref{tab:knn-rmspe-table} show that the RMSE (of training data) of K-NN regression is 0.187 and the RMSPE (of testing data) of K-NN regression is 0.284.
+
+\hypertarget{comparing-results}{%
+\subsection{Comparing Results}\label{comparing-results}}
+
+Looking at the visualizations of both methods, we cannot evidently see which model is better. The linear regression model has a relatively even ratio of points above and under the fitted line, but our K-NN Regression is also flexible and follows the data points. Hence, we must rely on the calculated RMSPE to determine the better model.
+
+As seen in the results section, the the RMSE (of our training data) of linear regression is 0.261, and the RMSPE (of our testing data) of the linear regression is 0.385. The RMSE (of training data) of K-NN regression is 0.187, and the RMSPE (of testing data) of K-NN linear regression is 0.284 By comparing the RMSE of both methods, we can see that our K-NN regression model has a slightly lower RMSE on our training data. By comparing the RMSPE of both methods, we can see that again our K-NN regression model has a slightly lower RMSPE on our testing data. Therefore, our K-NN Regression Model is slightly more accurate.
+
+Due to the higher accuracy of our K-NN Regression, our final visualization of the best model is shown in Figure \ref{fig:knn-regression-plot}.
+
+\hypertarget{conclusion-discussion}{%
+\subsection{Conclusion \& Discussion}\label{conclusion-discussion}}
+
+Before performing the analysis, we expected to find a positive, linear relationship between PEG and STG. The intuition was that as a student spends more time studying, they should perform better. Our analysis however, found that the accuracy for our linear regression model is 0.385, while the accuracy of our K-NN regression is 0.284 (where the range of degree is 1). Both of these types of regression have a prediction error percentage of about 40\% (therefore our accuracy is about 60\%). Our K-NN Regression model is slightly better than our linear regression due to its higher accuracy, which is consistent with the guess stated in the Methods section. The overall analysis shows that the model has relatively low accuracy.
+
+This outcome of the analysis was unexpected. However, it is consistent with the Figure \ref{fig:peg-stg-plot} , which shows no evidence of a relationship between these two variables.
+
+As mentioned in the Introduction, we had initially believed the accuracy of our K-NN regression to be about 80\%. However, the tested accuracy was only of about 60\%. Since there are no missing observations in our data set, there may be several reasons causing this difference in estimated accuracy and the actual accuracy calculated. On one hand, this can be attributed to the fact that exam performance could be affected by other external factors such as health condition, student IQ, stress levels, learning ability, etc. that were not in the data set. On the other hand, we can also say that our data set may not be big enough to directly draw a relationship between just study time and exam performance.Future studies could seek out other forms of prediction that can predict using multiple factors or find a larger data set with more observations.
+
+In conclusion, one could draw the following conclusion from out findings while keeping in mind the analysis and dataset limitations: as study time increases, students generally perform better, but other external factors can also come into play and affect final results.
+
+Similar studies could build upon this one and attempt to identify study methods and efficiency parameter. Some future questions to consider are:
+
+How much time should a student be spending studying to improve exam performance?
+How do other factors (such as repetition, knowledge level, etc.) contribute to exam performance?
+Can a similar approach be used in the industry to predict workers' performance based on their working time? How?
+
+\hypertarget{references}{%
+\subsection*{References}\label{references}}
+\addcontentsline{toc}{subsection}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-user-modeling-approach}{}}%
+Colak, Ilhami, Seref Sagiroglu, and H. Tolga Kahraman. 2008. \emph{A User Modeling Approach to Web Based Adaptive Educational Hypermedia Systems}. IEEE. \url{https://ieeexplore.ieee.org/document/4725051}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-results-supportive}{}}%
+E. AshbyPlant, K. AndersEricsson, and LenHillKiaAsberg. 2005. \emph{Why Study Time Does Not Predict Grade Point Average Across College Students: Implications of Deliberate Practice for Academic Performance}. \url{https://doi.org/10.1016/j.cedpsych.2004.06.001}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-discussion-supportive}{}}%
+Gail I. Hudson, Sarath A. Nonis \&. 2010. \emph{Academic Performance of College Students: Influence of Time Spent Studying and Working}. \url{https://doi.org/10.3200/JOEB.81.3.151-159}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-student-performance}{}}%
+Kahraman, H. Tolga, Seref Sagiroglu, and Ilhami Colak. 2009. {``User Knowledge Modeling Data Set.''} UCI Machine Learning Repository. \url{https://archive.ics.uci.edu/ml/datasets/User+Knowledge+Modeling\#}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-development-adaptive-edu-sys}{}}%
+---------. 2010. \emph{Development of Adaptive and Intelligent Web-Based Educational Systems}. IEEE. \url{https://ieeexplore.ieee.org/abstract/document/5612054?casa_token=7H8SL8Adw_MAAAAA:XQdCJf7zvfJu8qtptRvqpyvEC7fuiGU1phE5tjqI_yh7dX9iGerXpv58scy5mBPrWmX6dVaG}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-knowledge-based-systems}{}}%
+---------. 2013. \emph{The Development of Intuitive Knowledge Classifier and the Modeling of Domain Dependent Data}. Elsevier Science Publishers B. V. \url{https://doi.org/10.1016/j.knosys.2012.08.009}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-init-student-models}{}}%
+Maria Virvou, Victoria Tsiriga \&. 2004. \emph{A Framework for the Initialization of Student Models in Web-Based Intelligent Tutoring Systems. User Modeling and User-Adapted Interaction}. \url{https://link.springer.com/article/10.1023/B:USER.0000043396.14788.cc\#citeas}.
+
+\end{CSLReferences}
+
+\end{document}
