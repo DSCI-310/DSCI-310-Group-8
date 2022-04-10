@@ -101,7 +101,9 @@ Using R version 4.1.1, Jupyter and R packages are listed here:
     
 ```
 
-This is the link to our package documentation [here](https://dsci-310.github.io/DSCI-310-Group-8-package/) .
+
+This is the link to our package for r-group8 documentation [here](https://dsci-310.github.io/DSCI-310-Group-8-package/) .
+
 
 
 ## License
