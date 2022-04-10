@@ -23,7 +23,7 @@ The dataset we used was the User Knowledge Modeling Dataset provided by [UCL Mac
 ## Report
 The analysis report can be found [here](https://github.com/DSCI-310/DSCI-310-Group-8/blob/main/analysis/student_performance_analysis.ipynb).
 
-## Usage(How to Run the Project)
+## Usage_How to Run the Project
 In this project, we use a Docker container image to make the project reproducible by creating a computational environment. If you would like to run this project to reproduce our results you can reproducibly execute the project non-interactively. If you would like to collaborate on this project, you can interactively run, edit and explore the project in Jupyter Lab.
 
 ### How to run this project non-interactively 
