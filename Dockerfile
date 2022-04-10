@@ -10,7 +10,7 @@ RUN conda install --yes -c conda-forge\
     r-knitr=1.37 \
     r-reshape=0.8.8 \
     r-repr=1.1.4 \
-    r-tinytex=0.37 \
+    r-tinytex=0.38 \
     r-shiny=1.7.1 \
     r-tidyverse=1.3.1 \
     r-tidymodels=0.1.4 \
