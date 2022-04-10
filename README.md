@@ -101,6 +101,10 @@ Using R version 4.1.1, Jupyter and R packages listed here:
     
 ```
 
+
+This is the link to our package for r-group8 documentation [here](https://dsci-310.github.io/DSCI-310-Group-8-package/) .
+
+
 ## License
 This project is licensed under the MIT License and [Creative Commons Attribution-NonCommerical-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:1" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />
