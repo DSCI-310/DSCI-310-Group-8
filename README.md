@@ -80,7 +80,7 @@ Attention: The dependencies version have been listed below. In order to properly
 
 ## Dependencies
 
-Using R version 4.1.1, Jupyter and R packages listed here:
+Using R version 4.1.1, Jupyter and R packages are listed here:
 
 ```
     r-bookdown=0.25 \  
@@ -100,6 +100,9 @@ Using R version 4.1.1, Jupyter and R packages listed here:
     r-group8=0.0.0.9000
     
 ```
+
+This is the link to our package documentation [here](https://dsci-310.github.io/DSCI-310-Group-8-package/) .
+
 
 ## License
 This project is licensed under the MIT License and [Creative Commons Attribution-NonCommerical-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/)
