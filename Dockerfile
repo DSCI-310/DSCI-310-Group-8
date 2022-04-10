@@ -17,4 +17,4 @@ RUN conda install --yes -c conda-forge\
     r-rlang=1.0.2
     
 
-RUN Rsciprt -e 'devtools::install_github("DSCI-310/DSCI-310-Group-8-package", force = TRUE)'
+RUN Rscript -e 'devtools::install_github("DSCI-310/DSCI-310-Group-8-package", force = TRUE)'
