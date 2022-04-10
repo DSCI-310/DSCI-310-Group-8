@@ -47,7 +47,6 @@ library(tidyverse)
 library(tidymodels)
 library(docopt)
 library(dplyr)
-library(gdata)
 library(GGally)
 library(reshape)
 ```
